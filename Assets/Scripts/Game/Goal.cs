@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    private GameController game;
-
     public enum Team { left, right }
     public Team team;
 
-    private void Start() 
-    {
-        game = FindObjectOfType<GameController>();
-    }
 
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.tag == "Ball" && !game.matchIsEnded)
+        if (other.tag == "Ball" && !GameController.get.matchIsEnded)
         {
             if (team == Team.left)
             {
-                game.UpdateScore(new Vector2(0, 1));
+                GameController.get.UpdateScore(new Vector2(0, 1));
             }
-            else game.UpdateScore(new Vector2(1, 0));
+            else GameController.get.UpdateScore(new Vector2(1, 0));
         }
     }
 }

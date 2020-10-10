@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private GameController game;
     private Rigidbody rb;
     private Rigidbody ballRb;
     private Animator anim;
@@ -23,7 +22,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         distToGround = GetComponent<Collider>().bounds.extents.y;
-        game = FindObjectOfType<GameController>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -57,7 +55,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         // Can Move
-        if (!game.waitScore)
+        if (!GameController.get.waitScore)
         {
             // Move
             transform.position += moveInput * moveSpeed * Time.fixedDeltaTime;
@@ -109,7 +107,7 @@ public class Player : MonoBehaviour
             Debug.Log("Kick 4");
         }
 
-        // kick
+        // R E B O U N D
         if (other.gameObject.tag == "Ball")
         {
             if (ballRb == null)

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    private Transform leftPlayer;
-    private Transform rightPlayer;
-    private Transform ball;
+    public Transform leftPlayer { get; private set; }
+    public Transform rightPlayer { get; private set; }
+    public Transform ball { get; private set; }
 
     // left vs right
     private Vector2 matchScore = new Vector2(0, 0);
@@ -29,6 +29,14 @@ public class GameController : MonoBehaviour
     [Header("Debug - No Modify")]
     public bool waitScore = true;
     public bool matchIsEnded = false;
+    public bool istartMatch = false;
+
+    public static GameController get;
+
+    void Awake() 
+    {
+        get = this;
+    }
 
     void Start()
     {
@@ -47,12 +55,14 @@ public class GameController : MonoBehaviour
         matchScore += score;
         leftScoreText.text = matchScore.x.ToString();
         rightScoreText.text = matchScore.y.ToString();
-        WhenScoring();
+        StartCoroutine(WhenScoring());
     }
 
     private void OnMatchInit()
     {
+        Time.timeScale = 1f;
         matchIsEnded = false;
+        istartMatch = false;
 
         // Reset Scores
         matchScore = new Vector2(0, 0);
@@ -70,8 +80,15 @@ public class GameController : MonoBehaviour
         StartCoroutine(MatchTimer());
     }
 
-    private void WhenScoring()
+    private IEnumerator WhenScoring()
     {
+        if (istartMatch)
+        {
+            Time.timeScale = 0.5f;
+            yield return new WaitForSeconds(0.4f);
+            Time.timeScale = 1f;
+        }
+
         // Reset Positions
         leftPlayer.position = new Vector3(-6, -0.2f, -2);
         rightPlayer.position = new Vector3(6, -0.2f, -2);
@@ -84,6 +101,7 @@ public class GameController : MonoBehaviour
         ballRb.angularVelocity = Vector3.zero;
     
         waitScore = true;
+        istartMatch = true;
     }
 
     private IEnumerator MatchTimer()
@@ -109,6 +127,7 @@ public class GameController : MonoBehaviour
 
         Debug.Log("Match is Finish");
         matchIsEnded = true;
+        Time.timeScale = 0.8f;
         
         endMatchText.text = "Fim da Parida";
         endMatchText.gameObject.SetActive(true);
