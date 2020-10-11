@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     public Text rightScoreText;
     public Text endMatchText;
     public Animator goalText;
+    public GameObject mobile;
 
     [Header("Match Settigs")]
     public float matchTime = 90f;
@@ -47,6 +48,12 @@ public class GameController : MonoBehaviour
         rightPlayer = GameObject.FindGameObjectWithTag("Player1").transform;
         leftPlayer = GameObject.FindGameObjectWithTag("Player2").transform;
         ball = GameObject.FindGameObjectWithTag("Ball").transform;
+
+        #if UNITY_ANDROID
+            mobile.SetActive(true);
+        #else
+            mobile.SetActive(false);
+        #endif
     }
 
     void Start()

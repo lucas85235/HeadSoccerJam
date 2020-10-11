@@ -54,7 +54,7 @@ public class Solo : MonoBehaviour
         // right player won
         else if (match == GameController.Match.rightWon)
         {
-            if (countPhase < 4)
+            if (countPhase < 3)
             {
                 next.SetActive(true);
             }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b37b11c99312034489c996a49d58cf5, type: 3}
   m_Name: saitoma
   m_EditorClassIdentifier: 
-  head: {fileID: 21300000, guid: e42f978baf4a1f74fae3b884bde01d8a, type: 3}
+  head: {fileID: 1768504623192776820, guid: e42f978baf4a1f74fae3b884bde01d8a, type: 3}
   body: {fileID: 21300000, guid: 754d6a422be87a343979b295bbbc60a5, type: 3}
   shoes: {fileID: 21300000, guid: d9dc5e8af8bb9bb469dbf1f22f2ba41a, type: 3}
