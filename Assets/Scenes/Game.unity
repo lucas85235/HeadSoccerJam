@@ -1373,7 +1373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &417715358
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1730,7 +1730,7 @@ MonoBehaviour:
   rightScoreText: {fileID: 1796122404}
   endMatchText: {fileID: 1038432588}
   goalText: {fileID: 1531799761}
-  mobile: {fileID: 0}
+  mobile: {fileID: 417715357}
   matchTime: 60
   startWhistle: {fileID: 8300000, guid: af4cb3494b96087428937c2348e754bd, type: 3}
   restartWhistle: {fileID: 8300000, guid: 1a5d0e636fa8d7246a717fbaefbf48e0, type: 3}
@@ -5867,6 +5867,7 @@ MonoBehaviour:
   kickForce: 180
   kickSound: {fileID: 8300000, guid: 251c638ff709cd747a665d54e0efb142, type: 3}
   headSound: {fileID: 8300000, guid: d48580c7f9bddcd418c6360df0720ef8, type: 3}
+  jumpButton: {fileID: 0}
   isGround: 0
   distToGround: 0
   canKick: 0

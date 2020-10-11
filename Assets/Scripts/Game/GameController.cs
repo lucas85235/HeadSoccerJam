@@ -49,11 +49,11 @@ public class GameController : MonoBehaviour
         leftPlayer = GameObject.FindGameObjectWithTag("Player2").transform;
         ball = GameObject.FindGameObjectWithTag("Ball").transform;
 
-        // #if UNITY_ANDROID
-        //     mobile.SetActive(true);
-        // #else
-        //     mobile.SetActive(false);
-        // #endif
+        #if UNITY_ANDROID
+            mobile.SetActive(true);
+        #else
+            mobile.SetActive(false);
+        #endif
     }
 
     void Start()

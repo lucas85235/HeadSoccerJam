@@ -12,6 +12,13 @@ public class MainMenu : MonoBehaviour
     public GameObject chapter2;
     public GameObject chapter3;
 
+    public static MainMenu get;
+
+    private void Awake()
+    {
+        get = this;
+    }
+
     public void Menu()
     {
         menu.SetActive(true);
@@ -42,5 +49,20 @@ public class MainMenu : MonoBehaviour
     public void Chapter3()
     {
         chapter3.SetActive(true);
+    }
+
+    public void LoadChapter1()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void LoadChapter2()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void LoadChapter3()
+    {
+        SceneManager.LoadScene("Game");
     }
 }
