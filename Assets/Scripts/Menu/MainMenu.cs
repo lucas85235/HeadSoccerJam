@@ -8,10 +8,9 @@ public class MainMenu : MonoBehaviour
     public GameObject menu;
     public GameObject equip;
 
-    void Start()
-    {
-        
-    }
+    public GameObject chapter1;
+    public GameObject chapter2;
+    public GameObject chapter3;
 
     public void Menu()
     {
@@ -28,5 +27,20 @@ public class MainMenu : MonoBehaviour
     public void PlayGame(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    public void Chapter1()
+    {
+        chapter1.SetActive(true);
+    }
+
+    public void Chapter2()
+    {
+        chapter2.SetActive(true);
+    }
+
+    public void Chapter3()
+    {
+        chapter3.SetActive(true);
     }
 }

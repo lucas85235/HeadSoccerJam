@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     public Text leftScoreText;
     public Text rightScoreText;
     public Text endMatchText;
+    public Animator goalText;
 
     [Header("Match Settigs")]
     public float matchTime = 90f;
@@ -55,10 +56,35 @@ public class GameController : MonoBehaviour
 
     public void UpdateScore(Vector2 score)
     {
+        waitScore = true;
         matchScore += score;
         leftScoreText.text = matchScore.x.ToString();
         rightScoreText.text = matchScore.y.ToString();
         StartCoroutine(WhenScoring());
+    }
+
+    private IEnumerator WhenScoring()
+    {
+        if (isStartMatch)
+        {
+            Time.timeScale = 0.5f;
+            goalText.SetTrigger("Goal");
+            AudioSource.PlayClipAtPoint(afterScore, Camera.main.transform.position);
+            yield return new WaitForSeconds(0.4f);
+            Time.timeScale = 1f;
+        }
+
+        // Reset Positions
+        leftPlayer.position = new Vector3(-6, -0.2f, -2);
+        rightPlayer.position = new Vector3(6, -0.2f, -2);
+        ball.position = new Vector3(0, 3.75f, -2);
+
+        // Stop ball movement
+        var ballRb = ball.GetComponent<Rigidbody>();
+        ballRb.constraints = RigidbodyConstraints.FreezeAll;
+        ballRb.useGravity = false;
+        ballRb.velocity = Vector3.zero;
+        ballRb.angularVelocity = Vector3.zero;        
     }
 
     public void OnMatchInit()
@@ -83,30 +109,6 @@ public class GameController : MonoBehaviour
         StartCoroutine(MatchTimer());
     }
 
-    private IEnumerator WhenScoring()
-    {
-        if (isStartMatch)
-        {
-            Time.timeScale = 0.5f;
-            AudioSource.PlayClipAtPoint(afterScore, Camera.main.transform.position);
-            yield return new WaitForSeconds(0.4f);
-            Time.timeScale = 1f;
-        }
-
-        // Reset Positions
-        leftPlayer.position = new Vector3(-6, -0.2f, -2);
-        rightPlayer.position = new Vector3(6, -0.2f, -2);
-        ball.position = new Vector3(0, 3.75f, -2);
-
-        // Stop ball movement
-        var ballRb = ball.GetComponent<Rigidbody>();
-        ballRb.useGravity = false;
-        ballRb.velocity = Vector3.zero;
-        ballRb.angularVelocity = Vector3.zero;
-    
-        waitScore = true;
-    }
-
     private IEnumerator MatchTimer()
     {
         float timer = matchTime;
@@ -127,7 +129,11 @@ public class GameController : MonoBehaviour
                 else AudioSource.PlayClipAtPoint(restartWhistle, Camera.main.transform.position);
                 
                 yield return new WaitForSeconds(1);
-                ball.GetComponent<Rigidbody>().useGravity = true;
+                var ballRb = ball.GetComponent<Rigidbody>();
+                ballRb.constraints = RigidbodyConstraints.None;
+                ballRb.constraints = RigidbodyConstraints.FreezeRotation;
+                ballRb.constraints = RigidbodyConstraints.FreezePositionZ;
+                ballRb.useGravity = true;
                 waitScore = false;
             }
             
@@ -142,7 +148,7 @@ public class GameController : MonoBehaviour
         matchIsEnded = true;
         Time.timeScale = 0.8f;
         
-        endMatchText.text = "Fim da Parida";
+        endMatchText.text = "Fim da Partida";
         endMatchText.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1.25f);
@@ -165,17 +171,17 @@ public class GameController : MonoBehaviour
         // Empate
         if (match == Match.empate)
         {
-            endMatchText.text = "EMPATE";
+            endMatchText.text = "<color=#E15253>EMPATE</color>";
         }
         // left player won
         else if (match == Match.leftWon)
         {
-            endMatchText.text = "VITORIA DO " + leftPlayer.name;
+            endMatchText.text = "<color=#E15253>DERROTA</color>";
         }
         // right player won
         else if (match == Match.rightWon)
         {
-            endMatchText.text = "VITORIA DO " + rightPlayer.name;
+            endMatchText.text = "VITÓRIA";
         }
 
         yield return new WaitForSeconds(2.5f);

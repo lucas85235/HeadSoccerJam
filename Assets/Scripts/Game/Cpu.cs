@@ -32,7 +32,11 @@ public class Cpu : MonoBehaviour {
     [SerializeField] float kickForce ;
 
     [Header("Move Rules")]
-	 Vector2 cpuFieldLimits = new Vector2(1f, 8.5f);
+	public Vector2 cpuFieldLimits = new Vector2(1f, 8.5f);
+
+    [Header("Audios")]
+    public AudioClip kickSound;
+    public AudioClip headSound;
 
     [Header("Debug - No Modify")]
     public bool isGround;
@@ -170,6 +174,7 @@ public class Cpu : MonoBehaviour {
         if (IsGrounded())
         {
             rebound = new Vector3(Random.Range(1.5f, 2f), Random.Range(0.5f, 1f), 0);
+            AudioSource.PlayClipAtPoint(kickSound, Camera.main.transform.position);
             Debug.Log("Kick 1");
         }
 
@@ -177,6 +182,7 @@ public class Cpu : MonoBehaviour {
         else if (!IsGrounded())
         {
             rebound = new Vector3(Random.Range(1f, 1.5f), Random.Range(1.2f, 1.8f), 0);
+            AudioSource.PlayClipAtPoint(headSound, Camera.main.transform.position);
             Debug.Log("Kick 2");
         }
 

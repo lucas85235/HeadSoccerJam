@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
 
             if (canKick && ballRb != null)
             {
+                AudioSource.PlayClipAtPoint(kickSound, Camera.main.transform.position);
                 Vector3 rebound = new Vector3(-(Random.Range(1.5f, 2f)), Random.Range(0.5f, 1f), 0);
                 ballRb.AddForce(rebound * kickForce, ForceMode.Force);
                 Debug.Log("Chute");
@@ -82,6 +83,8 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision other) 
     {
         if (other.gameObject.tag != "Ball") return;
+
+        AudioSource.PlayClipAtPoint(headSound, Camera.main.transform.position);
 
         canKick = true;
         Vector3 rebound = new Vector3(-(Random.Range(0.5f, 1f)), Random.Range(0.5f, 1f), 0);

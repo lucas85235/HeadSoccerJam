@@ -10,7 +10,7 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.tag == "Ball" && !GameController.get.matchIsEnded)
+        if (other.tag == "Ball" && !GameController.get.matchIsEnded && !GameController.get.waitScore)
         {
             if (team == Team.left)
             {
