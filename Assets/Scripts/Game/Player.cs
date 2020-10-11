@@ -1,6 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
+
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -18,10 +23,16 @@ public class Player : MonoBehaviour
     public AudioClip kickSound;
     public AudioClip headSound;
 
+    [Header("Mobile")]
+    public Button jumpButton;
+
     [Header("Debug - No Modify")]
     public bool isGround;
     public float distToGround;
     public bool canKick;
+
+    public bool JumpInput => true;
+    public bool KickInput => true;
 
     void Start()
     {
@@ -34,10 +45,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Get Move Input
-        moveInput = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+        moveInput = new Vector3(CrossPlatformInputManager.GetAxis("Horizontal"), 0, 0);
 
         // Start Jump
-        if (Input.GetKeyDown(KeyCode.Z) && IsGrounded())
+        if ((Input.GetKeyDown(KeyCode.Z))&& IsGrounded())
         {
             Jump();
         }
