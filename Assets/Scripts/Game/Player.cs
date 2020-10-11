@@ -14,6 +14,10 @@ public class Player : MonoBehaviour
     [Range(30, 60)] public float jumpForce = 2;
     public float kickForce = 2;
 
+    [Header("Audios")]
+    public AudioClip kickSound;
+    public AudioClip headSound;
+
     [Header("Debug - No Modify")]
     public bool isGround;
     public float distToGround;

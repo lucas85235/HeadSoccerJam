@@ -26,28 +26,30 @@ public class GameController : MonoBehaviour
     [Header("Match Settigs")]
     public float matchTime = 90f;
 
+    [Header("Audios")]
+    public AudioClip startWhistle;
+    public AudioClip restartWhistle;
+    public AudioClip endWhistle;
+
     [Header("Debug - No Modify")]
     public bool waitScore = true;
     public bool matchIsEnded = false;
-    public bool istartMatch = false;
+    public bool isStartMatch = false;
 
     public static GameController get;
 
     void Awake() 
     {
         get = this;
+
+        rightPlayer = GameObject.FindGameObjectWithTag("Player1").transform;
+        leftPlayer = GameObject.FindGameObjectWithTag("Player2").transform;
+        ball = GameObject.FindGameObjectWithTag("Ball").transform;
     }
 
     void Start()
     {
-        rightPlayer = GameObject.FindGameObjectWithTag("Player1").transform;
-        leftPlayer = GameObject.FindGameObjectWithTag("Player2").transform;
-        ball = GameObject.FindGameObjectWithTag("Ball").transform;
-
         MacthEnd += OnEndMatch;
-
-        OnMatchInit();
-        StartCoroutine(MatchTimer());
     }
 
     public void UpdateScore(Vector2 score)
@@ -58,11 +60,11 @@ public class GameController : MonoBehaviour
         StartCoroutine(WhenScoring());
     }
 
-    private void OnMatchInit()
+    public void OnMatchInit()
     {
         Time.timeScale = 1f;
         matchIsEnded = false;
-        istartMatch = false;
+        isStartMatch = false;
 
         // Reset Scores
         matchScore = new Vector2(0, 0);
@@ -82,7 +84,7 @@ public class GameController : MonoBehaviour
 
     private IEnumerator WhenScoring()
     {
-        if (istartMatch)
+        if (isStartMatch)
         {
             Time.timeScale = 0.5f;
             yield return new WaitForSeconds(0.4f);
@@ -101,7 +103,6 @@ public class GameController : MonoBehaviour
         ballRb.angularVelocity = Vector3.zero;
     
         waitScore = true;
-        istartMatch = true;
     }
 
     private IEnumerator MatchTimer()
@@ -114,6 +115,15 @@ public class GameController : MonoBehaviour
             // Pause afte start and scoring
             if (waitScore)
             {
+                // Start Match
+                if (!isStartMatch)
+                {
+                    AudioSource.PlayClipAtPoint(startWhistle, Camera.main.transform.position);
+                    isStartMatch = true;
+                }
+                // Restart Match
+                else AudioSource.PlayClipAtPoint(restartWhistle, Camera.main.transform.position);
+                
                 yield return new WaitForSeconds(1);
                 ball.GetComponent<Rigidbody>().useGravity = true;
                 waitScore = false;
@@ -126,6 +136,7 @@ public class GameController : MonoBehaviour
         }
 
         Debug.Log("Match is Finish");
+        AudioSource.PlayClipAtPoint(endWhistle, Camera.main.transform.position);
         matchIsEnded = true;
         Time.timeScale = 0.8f;
         
@@ -150,24 +161,22 @@ public class GameController : MonoBehaviour
     private IEnumerator OnEndMatchRoutine(Match match)
     {
         // Empate
-        if (matchScore.x == matchScore.y)
+        if (match == Match.empate)
         {
             endMatchText.text = "EMPATE";
         }
         // left player won
-        else if (matchScore.x > matchScore.y)
+        else if (match == Match.leftWon)
         {
             endMatchText.text = "VITORIA DO " + leftPlayer.name;
         }
         // right player won
-        else if (matchScore.x < matchScore.y)
+        else if (match == Match.rightWon)
         {
             endMatchText.text = "VITORIA DO " + rightPlayer.name;
         }
 
         yield return new WaitForSeconds(2.5f);
-
-        OnMatchInit();
     }
 
     private void OnDestroy() 

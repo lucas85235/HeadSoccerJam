@@ -31,7 +31,7 @@ public class Cpu : MonoBehaviour {
     [SerializeField] float kickForce ;
 
     [Header("Move Rules")]
-	 Vector2 cpuFieldLimits = new Vector2(1.5f, 8.5f);
+	 Vector2 cpuFieldLimits = new Vector2(1f, 8.5f);
 
     [Header("Debug - No Modify")]
     public bool isGround;
@@ -50,7 +50,7 @@ public class Cpu : MonoBehaviour {
 	}
 
 	//change the AI configuration based on the enum selection
-	private void SetCpuLevel() 
+	public void SetCpuLevel() 
     {
 		switch(cpuLevel) 
         {
