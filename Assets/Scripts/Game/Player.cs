@@ -37,13 +37,13 @@ public class Player : MonoBehaviour
         moveInput = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
 
         // Start Jump
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Z) && IsGrounded())
         {
             Jump();
         }
 
         // K I C K
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             anim.SetTrigger("Kick");
 

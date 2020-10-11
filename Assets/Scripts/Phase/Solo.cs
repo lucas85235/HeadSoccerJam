@@ -11,10 +11,24 @@ public class Solo : MonoBehaviour
 
     public int countPhase = 0;
 
+    [Header("Opponents")]
+    public CharacteSkin generic;
+    public CharacteSkin caio;
+    public CharacteSkin bruno;
+    public CharacteSkin saitoma;
+
     void Start()
     {
         GameController.get.MacthEnd += OnSoloEndMatch;
         GameController.get.OnMatchInit();
+
+
+        var cpuLevel = GameController.get.leftPlayer.GetComponent<Cpu>();
+
+        cpuLevel.cpuLevel = Cpu.CpuLevels.easy;
+        cpuLevel.SetCpuLevel();
+        GameController.get.leftPlayer.GetComponent<ChangeCharactersSprites>()
+            .ChangeSkin(generic);
     }
 
     private void OnSoloEndMatch(GameController.Match match)
@@ -40,7 +54,7 @@ public class Solo : MonoBehaviour
         // right player won
         else if (match == GameController.Match.rightWon)
         {
-            if (countPhase < 8)
+            if (countPhase < 4)
             {
                 next.SetActive(true);
             }
@@ -66,25 +80,33 @@ public class Solo : MonoBehaviour
 
         var cpuLevel = GameController.get.leftPlayer.GetComponent<Cpu>();
 
-        if (countPhase < 2)
+        if (countPhase == 0)
         {
             cpuLevel.cpuLevel = Cpu.CpuLevels.easy;
-            cpuLevel.SetCpuLevel();            
+            cpuLevel.SetCpuLevel();
+            GameController.get.leftPlayer.GetComponent<ChangeCharactersSprites>()
+                .ChangeSkin(generic);
         }
-        else if (countPhase < 4)
+        else if (countPhase == 1)
         {
             cpuLevel.cpuLevel = Cpu.CpuLevels.normal;
-            cpuLevel.SetCpuLevel();            
+            cpuLevel.SetCpuLevel();
+            GameController.get.leftPlayer.GetComponent<ChangeCharactersSprites>()
+                .ChangeSkin(caio);
         }
-        else if (countPhase < 6)
+        else if (countPhase == 2)
         {
             cpuLevel.cpuLevel = Cpu.CpuLevels.hard;
-            cpuLevel.SetCpuLevel();            
+            cpuLevel.SetCpuLevel();
+            GameController.get.leftPlayer.GetComponent<ChangeCharactersSprites>()
+                .ChangeSkin(bruno);
         }
-        else if (countPhase < 8)
+        else if (countPhase == 3)
         {
             cpuLevel.cpuLevel = Cpu.CpuLevels.veryHard;
-            cpuLevel.SetCpuLevel();            
+            cpuLevel.SetCpuLevel();
+            GameController.get.leftPlayer.GetComponent<ChangeCharactersSprites>()
+                .ChangeSkin(saitoma);
         }
     }
 
