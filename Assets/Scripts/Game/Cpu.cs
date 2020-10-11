@@ -16,6 +16,7 @@ public class Cpu : MonoBehaviour {
 	private Rigidbody rb;
     private Rigidbody ballRb;
 	private GameObject ball;
+    private Animator anim;
 
 	private bool canJump = true;
 	private float adjustingPosition;
@@ -41,6 +42,7 @@ public class Cpu : MonoBehaviour {
     {
         distToGround = GetComponent<Collider>().bounds.extents.y;
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
 
 		// Find and cache ball object
 		ball = GameObject.FindGameObjectWithTag("Ball");
@@ -181,6 +183,8 @@ public class Cpu : MonoBehaviour {
         // R E B O U N D
         if (other.gameObject.tag == "Ball")
         {
+            anim.SetTrigger("Kick");
+
             // rand chance of enable jump
             if(IsGrounded() && Random.Range(0, 2) == 0)
                 StartCoroutine(JumpActivation());

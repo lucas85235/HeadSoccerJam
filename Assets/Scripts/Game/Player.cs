@@ -43,11 +43,11 @@ public class Player : MonoBehaviour
         }
 
         // K I C K
-        if (Input.GetMouseButtonDown(0) && canKick)
+        if (Input.GetMouseButtonDown(0))
         {
             anim.SetTrigger("Kick");
 
-            if (ballRb != null)
+            if (canKick && ballRb != null)
             {
                 Vector3 rebound = new Vector3(-(Random.Range(1.5f, 2f)), Random.Range(0.5f, 1f), 0);
                 ballRb.AddForce(rebound * kickForce, ForceMode.Force);
