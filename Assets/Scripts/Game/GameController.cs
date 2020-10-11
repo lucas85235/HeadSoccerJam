@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
     public AudioClip startWhistle;
     public AudioClip restartWhistle;
     public AudioClip endWhistle;
+    public AudioClip afterScore;
 
     [Header("Debug - No Modify")]
     public bool waitScore = true;
@@ -87,6 +88,7 @@ public class GameController : MonoBehaviour
         if (isStartMatch)
         {
             Time.timeScale = 0.5f;
+            AudioSource.PlayClipAtPoint(afterScore, Camera.main.transform.position);
             yield return new WaitForSeconds(0.4f);
             Time.timeScale = 1f;
         }
