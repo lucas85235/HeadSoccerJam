@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         moveInput = new Vector3(CrossPlatformInputManager.GetAxis("Horizontal"), 0, 0);
 
         // Start Jump
-        if ((Input.GetKeyDown(KeyCode.Z))&& IsGrounded())
+        if ((Input.GetKeyDown(KeyCode.Z)) && IsGrounded())
         {
             Jump();
         }
@@ -78,6 +78,27 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void CallJump()
+    {
+        if (IsGrounded())
+        {
+            Jump();
+        }
+    }
+
+    public void Kick()
+    {
+        anim.SetTrigger("Kick");
+
+        if (canKick && ballRb != null)
+        {
+            AudioSource.PlayClipAtPoint(kickSound, Camera.main.transform.position);
+            Vector3 rebound = new Vector3(-(Random.Range(1.5f, 2f)), Random.Range(0.5f, 1f), 0);
+            ballRb.AddForce(rebound * kickForce, ForceMode.Force);
+            Debug.Log("Chute");
+        }
+    }
+
     // Detect ground
     private bool IsGrounded()
     {
@@ -91,7 +112,7 @@ public class Player : MonoBehaviour
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
-    private void OnCollisionEnter(Collision other) 
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag != "Ball") return;
 
@@ -135,7 +156,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision other) 
+    private void OnCollisionExit(Collision other)
     {
         if (other.gameObject.tag == "Ball")
         {
