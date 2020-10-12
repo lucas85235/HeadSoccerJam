@@ -53,16 +53,16 @@ public class MainMenu : MonoBehaviour
 
     public void LoadChapter1()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Chapter1");
     }
 
     public void LoadChapter2()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Chapter2");
     }
 
     public void LoadChapter3()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Chapter3");
     }
 }
