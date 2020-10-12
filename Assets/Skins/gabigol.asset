@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b37b11c99312034489c996a49d58cf5, type: 3}
-  m_Name: saitoma
+  m_Name: gabigol
   m_EditorClassIdentifier: 
-  head: {fileID: 1768504623192776820, guid: e42f978baf4a1f74fae3b884bde01d8a, type: 3}
-  body: {fileID: 21300000, guid: bf0d8a089045402438b3da687525919f, type: 3}
+  head: {fileID: 21300000, guid: db64901ef34efdf4094526380905df69, type: 3}
+  body: {fileID: 21300000, guid: ea3c23b91c21a9547a4e75b687877a2a, type: 3}
   shoes: {fileID: 21300000, guid: d9dc5e8af8bb9bb469dbf1f22f2ba41a, type: 3}

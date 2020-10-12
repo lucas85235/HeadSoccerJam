@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     public Text leftScoreText;
     public Text rightScoreText;
     public Text endMatchText;
+    public GameObject controlsPopup;
     public Animator goalText;
     public GameObject mobile;
 
@@ -51,8 +52,10 @@ public class GameController : MonoBehaviour
 
         #if UNITY_ANDROID
             mobile.SetActive(true);
+            controlsPopup.SetActive(false);
         #else
             mobile.SetActive(false);
+            controlsPopup.SetActive(true);
         #endif
     }
 
@@ -131,11 +134,13 @@ public class GameController : MonoBehaviour
                 {
                     AudioSource.PlayClipAtPoint(startWhistle, Camera.main.transform.position);
                     isStartMatch = true;
+                    yield return new WaitForSeconds(1);
                 }
                 // Restart Match
                 else AudioSource.PlayClipAtPoint(restartWhistle, Camera.main.transform.position);
                 
                 yield return new WaitForSeconds(1);
+                controlsPopup.SetActive(false);
                 var ballRb = ball.GetComponent<Rigidbody>();
                 ballRb.constraints = RigidbodyConstraints.None;
                 ballRb.constraints = RigidbodyConstraints.FreezeRotation;

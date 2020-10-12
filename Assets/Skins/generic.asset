@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: generic
   m_EditorClassIdentifier: 
   head: {fileID: 21300000, guid: 6edb6205644aabf43820590cd9dc6a4b, type: 3}
-  body: {fileID: 21300000, guid: 754d6a422be87a343979b295bbbc60a5, type: 3}
+  body: {fileID: 21300000, guid: 18d42b968d4f1b04d8f2f2cce8bb66b6, type: 3}
   shoes: {fileID: 21300000, guid: 5bcf8b3261192f448920a527ec6c4a7c, type: 3}
