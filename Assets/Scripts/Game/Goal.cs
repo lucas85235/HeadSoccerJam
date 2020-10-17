@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    public enum Team { left, right }
+    public enum Team { player1, player2 }
     public Team team;
 
 
@@ -12,7 +12,7 @@ public class Goal : MonoBehaviour
     {
         if (other.tag == "Ball" && !GameController.get.matchIsEnded && !GameController.get.waitScore)
         {
-            if (team == Team.left)
+            if (team == Team.player1)
             {
                 GameController.get.UpdateScore(new Vector2(0, 1));
             }

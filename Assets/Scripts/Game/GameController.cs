@@ -85,8 +85,8 @@ public class GameController : MonoBehaviour
         }
 
         // Reset Positions
-        leftPlayer.position = new Vector3(-6, -0.2f, -2);
-        rightPlayer.position = new Vector3(6, -0.2f, -2);
+        leftPlayer.position = new Vector3(6, -0.2f, -2);
+        rightPlayer.position = new Vector3(-6, -0.2f, -2);
         ball.position = new Vector3(0, 3.75f, -2);
 
         // Stop ball movement
@@ -108,8 +108,8 @@ public class GameController : MonoBehaviour
         UpdateScore(Vector2.zero);
 
         // Reset Positions
-        leftPlayer.position = new Vector3(-6, -0.2f, -2);
-        rightPlayer.position = new Vector3(6, -0.2f, -2);
+        leftPlayer.position = new Vector3(6, -0.2f, -2);
+        rightPlayer.position = new Vector3(-6, -0.2f, -2);
 
         // Disable EndText
         endMatchText.gameObject.SetActive(false);
@@ -168,9 +168,9 @@ public class GameController : MonoBehaviour
         // Empate
         if (matchScore.x == matchScore.y) MacthEnd(Match.empate);
         // left player won
-        else if (matchScore.x > matchScore.y) MacthEnd(Match.leftWon);
+        else if (matchScore.x < matchScore.y) MacthEnd(Match.leftWon);
         // right player won
-        else if (matchScore.x < matchScore.y) MacthEnd(Match.rightWon);
+        else if (matchScore.x > matchScore.y) MacthEnd(Match.rightWon);
     }
 
     private void OnEndMatch(Match match)

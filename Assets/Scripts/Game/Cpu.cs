@@ -8,11 +8,6 @@ public class Cpu : MonoBehaviour {
 	/// This class ia a compact AI manager which moves the cpu opponent and manage its decisions.
 	/// </summary>
 
-	// A dropdown option to select the AI level
-	// The different AI levels uses different parameters for the speed and accuracy of the cpu.
-	public enum CpuLevels { easy, normal, hard, veryHard }
-	public CpuLevels cpuLevel = CpuLevels.easy;
-
 	private Rigidbody rb;
     private Rigidbody ballRb;
 	private GameObject ball;
@@ -21,8 +16,13 @@ public class Cpu : MonoBehaviour {
 	private bool canJump = true;
 	private float adjustingPosition;
 	private bool canMove = true;
+    private bool isGround;
+    private float distToGround;
 
-	[Header("private AI parameters")]
+	[Header("A Dropdown Option To Select The AI Level")]
+	public CpuLevels cpuLevel = CpuLevels.easy;
+
+	[Header("Private AI Parameters")]
 	[SerializeField] float moveSpeed;
 	[SerializeField] float jumpSpeed;
 	[SerializeField] float minJumpDistance;
@@ -37,10 +37,6 @@ public class Cpu : MonoBehaviour {
     [Header("Audios")]
     public AudioClip kickSound;
     public AudioClip headSound;
-
-    [Header("Debug - No Modify")]
-    public bool isGround;
-    public float distToGround;
 
 	void Awake () 
     {
@@ -66,7 +62,7 @@ public class Cpu : MonoBehaviour {
                 minJumpDistance = 2.5f;
                 accuracy = 0.4f;
                 jumpDelay = 0.3f;
-                maxProtectedDistance = -1.5f;
+                maxProtectedDistance = 1.5f;
                 kickForce = 180;
                 break;
 
@@ -76,7 +72,7 @@ public class Cpu : MonoBehaviour {
                 minJumpDistance = 3.5f;
                 accuracy = 0.3f;
                 jumpDelay = 0.2f;
-                maxProtectedDistance = -2.25f;
+                maxProtectedDistance = 2.25f;
                 kickForce = 220;
                 break;
 
@@ -86,7 +82,7 @@ public class Cpu : MonoBehaviour {
                 minJumpDistance = 3.5f;
                 accuracy = 0.2f;
                 jumpDelay = 0.1f;
-                maxProtectedDistance = -3.25f;
+                maxProtectedDistance = 3.25f;
                 kickForce = 260;
                 break;
             case CpuLevels.veryHard:
@@ -95,7 +91,7 @@ public class Cpu : MonoBehaviour {
                 minJumpDistance = 3.5f;
                 accuracy = 0.15f;
                 jumpDelay = 0.05f;
-                maxProtectedDistance = -4f;
+                maxProtectedDistance = 4f;
                 kickForce = 280;
                 break;
 		}
@@ -110,7 +106,7 @@ public class Cpu : MonoBehaviour {
 	/// <summary> Main cpu play routines </summary>
 	void CpuMoveToBall() 
     {
-		if(ball.transform.position.x < cpuFieldLimits.x && ball.transform.position.x < cpuFieldLimits.y) 
+		if(ball.transform.position.x > cpuFieldLimits.x && ball.transform.position.x < cpuFieldLimits.y) 
         {
 			//move the cpu towards the ball
 
@@ -126,7 +122,7 @@ public class Cpu : MonoBehaviour {
 			}
 		}
 
-        if(ball.transform.position.x > cpuFieldLimits.x)
+        if(ball.transform.position.x < cpuFieldLimits.x)
         {
 			transform.position = new Vector3(Mathf.SmoothStep(transform.position.x, maxProtectedDistance, Time.fixedDeltaTime * moveSpeed),
 			                                 transform.position.y,
@@ -173,7 +169,7 @@ public class Cpu : MonoBehaviour {
         // quando a bola só bate no jogador
         if (IsGrounded())
         {
-            rebound = new Vector3(Random.Range(1.5f, 2f), Random.Range(0.5f, 1f), 0);
+            rebound = new Vector3( -(Random.Range(1.5f, 2f)), Random.Range(0.5f, 1f), 0);
             AudioSource.PlayClipAtPoint(kickSound, Camera.main.transform.position);
             Debug.Log("Kick 1");
         }
@@ -181,7 +177,7 @@ public class Cpu : MonoBehaviour {
         // quando a bola bate no jogador e ele esta pulando
         else if (!IsGrounded())
         {
-            rebound = new Vector3(Random.Range(1f, 1.5f), Random.Range(1.2f, 1.8f), 0);
+            rebound = new Vector3( -(Random.Range(1f, 1.5f)), Random.Range(1.2f, 1.8f), 0);
             AudioSource.PlayClipAtPoint(headSound, Camera.main.transform.position);
             Debug.Log("Kick 2");
         }
@@ -201,4 +197,13 @@ public class Cpu : MonoBehaviour {
             ballRb.AddForce(rebound * kickForce, ForceMode.Force);
         }
 	}
+
+	// The different AI levels uses different parameters for the speed and accuracy of the cpu.
+	public enum CpuLevels 
+    { 
+        easy, 
+        normal, 
+        hard, 
+        veryHard 
+    }    
 }
