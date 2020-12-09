@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MadeInHouse;
 
 public class Goal : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.tag == "Ball" && !GameController.get.matchIsEnded && !GameController.get.waitScore)
+        if (other.tag == "Ball" && !GameManager.Instance.GameOver)
         {
             if (team == Team.player1)
             {
-                GameController.get.UpdateScore(new Vector2(0, 1));
+                GameManager.Instance.UpdateScore(new Vector2(0, 1));
             }
-            else GameController.get.UpdateScore(new Vector2(1, 0));
+            else GameManager.Instance.UpdateScore(new Vector2(1, 0));
         }
     }
 }

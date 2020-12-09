@@ -44,12 +44,15 @@ public class Cpu : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
-		// Find and cache ball object
-		ball = GameObject.FindGameObjectWithTag("Ball");
-
 		// StartCoroutine(ResetPosition());
 		SetCpuLevel();
 	}
+
+    private void Start() 
+    {
+		// Find and cache ball object
+		ball = GameObject.FindGameObjectWithTag("Ball");        
+    }
 
 	//change the AI configuration based on the enum selection
 	public void SetCpuLevel() 
@@ -99,7 +102,7 @@ public class Cpu : MonoBehaviour {
 	
 	void FixedUpdate () 
     {
-		if(canMove && !GameController.get.waitScore) // && !GameController.isGoalTransition && !GameController.gameIsFinished)
+		if(canMove) // && !GameController.isGoalTransition && !GameController.gameIsFinished)
 			CpuMoveToBall();
 	}
 

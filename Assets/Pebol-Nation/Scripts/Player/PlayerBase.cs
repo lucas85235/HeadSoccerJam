@@ -39,7 +39,7 @@ public abstract class PlayerBase : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         // Can Move
-        if (!GameController.get.waitScore)
+        if (true)
         {
             // Move
             transform.position += moveInput * moveSpeed * Time.fixedDeltaTime;
