@@ -11,7 +11,7 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.tag == "Ball" && !GameManager.Instance.GameOver)
+        if (other.tag == "Ball" && !GameManager.Instance.GameOver && GameManager.Instance.canScoring)
         {
             if (team == Team.player1)
             {

@@ -58,25 +58,25 @@ namespace MadeInHouse.Characters
                 // quando a bola só bate no jogador
                 if (jumpSkill.IsGrounded() && axisInput == 0)
                 {
-                    rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(-0.5f, -1f), 0);
+                    rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), 0);
                     Debug.Log("Kick 1");
                 }
                 // quando a bola bate no jogador e ele esta pulando
                 else if (!jumpSkill.IsGrounded() && axisInput == 0)
                 {
-                    rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(-1f, -1.5f), 0);
+                    rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(1f, 1.5f), 0);
                     Debug.Log("Kick 2");
                 }
                 // quando a bola bate no jogador e ele não esta pulando mas se movendo
                 else if (jumpSkill.IsGrounded() && axisInput != 0)
                 {
-                    rebound = new Vector3(Random.Range(1f, 1.5f), Random.Range(-0.5f, -1f), 0);
+                    rebound = new Vector3(Random.Range(1f, 1.5f), Random.Range(0.5f, 1f), 0);
                     Debug.Log("Kick 3");
                 }
                 // quando a bola bate no jogador e ele esta pulando e se movendo
                 else if (!jumpSkill.IsGrounded() && axisInput != 0)
                 {
-                    rebound = new Vector3(Random.Range(1f, 1.5f), Random.Range(-0.5f, -1f), 0);
+                    rebound = new Vector3(Random.Range(1f, 1.5f), Random.Range(0.5f, 1f), 0);
                     Debug.Log("Kick 4");
                 }
 
