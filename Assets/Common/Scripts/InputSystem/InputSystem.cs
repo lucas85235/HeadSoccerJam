@@ -11,6 +11,7 @@ namespace MadeInHouse
         public string axisY = "Vertical";
         public KeyCode jumpInput = KeyCode.Z;
         public KeyCode kickInput = KeyCode.X;
+        public KeyCode powerInput = KeyCode.E;
 
         public static InputSystem Instance;
 
@@ -23,6 +24,7 @@ namespace MadeInHouse
         public virtual float AxisY() { return Input.GetAxis("Vertical"); }
         public virtual bool Jump() { return Input.GetKeyDown(jumpInput); }
         public virtual bool Kick() { return Input.GetKeyDown(kickInput); }
+        public virtual bool Power() { return Input.GetKeyDown(powerInput); }
     }
 }
 

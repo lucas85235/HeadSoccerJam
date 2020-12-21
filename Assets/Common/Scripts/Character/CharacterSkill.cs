@@ -9,6 +9,8 @@ namespace MadeInHouse.Characters
 
     public class CharacterSkill : MonoBehaviour
     {
+        protected CharacterSkillPower skillPower;
+
         [Header("Feedbakcs")]
         public AudioClip skillSound;
 
@@ -19,7 +21,7 @@ namespace MadeInHouse.Characters
 
         protected virtual void Initialize()
         {
-
+            skillPower = GetComponent<CharacterSkillPower>();
         }
 
         #region Input Handle
@@ -56,7 +58,15 @@ namespace MadeInHouse.Characters
         {
             if (skillSound != null)
             {
-                AudioSource.PlayClipAtPoint(skillSound, Camera.main.transform.position);
+                SoundManager.Instance.PlayClipAtPoint(skillSound);
+            }
+        }
+
+        protected virtual void IncrementPower()
+        {
+            if (skillPower != null)
+            {
+                skillPower.Increment();
             }
         }
     }

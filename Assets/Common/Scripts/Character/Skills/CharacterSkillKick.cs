@@ -38,6 +38,7 @@ namespace MadeInHouse.Characters
         /// <summary> </summary>
         public override void Skill()
         {
+            base.Skill();
             anim.SetTrigger("Kick");
 
             if (canKick && ball != null)
@@ -45,6 +46,7 @@ namespace MadeInHouse.Characters
                 PlaySound();
                 Vector3 rebound = new Vector3(Random.Range(1.5f, 2f), Random.Range(-0.5f, -1f), 0);
                 ball.rb.AddForce(rebound * kickForce, ForceMode.Force);
+                IncrementPower();
             }
         }
 
@@ -80,11 +82,8 @@ namespace MadeInHouse.Characters
                     Debug.Log("Kick 4");
                 }
 
-                // R E B O U N D
-                if (other.gameObject.tag == "Ball")
-                {
-                    ball.BallRebound(rebound, kickForce);
-                }                
+                ball.BallRebound(rebound, kickForce);
+                IncrementPower();
             }
         }
 

@@ -30,6 +30,7 @@ namespace MadeInHouse.Characters
         /// <summary> Add force to a rigidbody for jump if detect ground </summary>
         public override void Skill()
         {
+            base.Skill();
             if (IsGrounded())
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
