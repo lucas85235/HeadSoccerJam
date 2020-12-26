@@ -1,0 +1,7 @@
+{
+    "items":
+    [
+        {"key":"test_1", "value":"My Game!"},
+        {"key":"test_ultima_linha", "value":"End"}
+    ]
+}

@@ -62,6 +62,3 @@ crashlytics-build.properties
 /Temp/UnityLockfile
 
 *.log
-
-Benchmark_Result.txt
-Benchmark_Result.txt.meta
