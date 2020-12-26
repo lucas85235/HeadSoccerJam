@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
+using Random = UnityEngine.Random;
+
 namespace MadeInHouse
 {
     public class GameManager : MonoBehaviour
@@ -20,6 +22,7 @@ namespace MadeInHouse
         public float restartMatchTimer = 1f;
         public float endMatchTimer = 1.25f;
         public float continueTimer = 2.5f;
+        public bool autoContinueAfterEnd = true;
 
         [Header("FeedBacks")]
         public Animator goalAnimtion;
@@ -50,6 +53,18 @@ namespace MadeInHouse
             Initialize();
         }
 
+        protected virtual void Update()
+        {
+            if (gameOver && InputSystem.Instance.Interact())
+            {
+                OnContinue();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                LevelLoader.Instance.LoadLevel("MainMenu");
+            }
+        }
+
         public virtual void Initialize()
         {
             gameOver = false;
@@ -65,6 +80,7 @@ namespace MadeInHouse
             UpdateScoreText();
 
             hud.endMatchText.gameObject.SetActive(false);
+            hud.coinEarnedText.gameObject.SetActive(false);
             SoundManager.Instance.PlayClipAtPoint(matchSounds.startWhistle);
             ResetPositions();
 
@@ -125,7 +141,15 @@ namespace MadeInHouse
                 hud.endMatchText.text = "VITÓRIA";
             }
 
-            Invoke("OnContinue", continueTimer);
+            int value = Random.Range(10, 50);
+            LegendCoin.Instance.EarnLegendCoin(value);
+            hud.coinEarnedText.text = "+" + value;
+            hud.coinEarnedText.gameObject.SetActive(true);
+
+            if (autoContinueAfterEnd)
+            {
+                Invoke("OnContinue", continueTimer);
+            }
         }
 
         protected virtual void OnContinue()
@@ -193,6 +217,7 @@ namespace MadeInHouse
         public Text leftScoreText;
         public Text rightScoreText;
         public Text endMatchText;
+        public Text coinEarnedText;
     }
 
     [System.Serializable]

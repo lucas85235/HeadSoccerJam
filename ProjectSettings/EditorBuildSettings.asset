@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Pebol-Legends/Scenes/MainMenu.unity
+    guid: 45383735ab9fe0b408ff48cba9447147
+  - enabled: 1
+    path: Assets/Pebol-Legends/Scenes/PebolLegends.unity
+    guid: 165b9efeeca6a3646a86717a32fae5e7
   m_configObjects: {}
