@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 4496138287620806301}
   - component: {fileID: 1519222961926828175}
   - component: {fileID: -7192262245471101764}
+  - component: {fileID: -9029165373311081904}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -225,7 +226,22 @@ MonoBehaviour:
   skillSound: {fileID: 0}
   powerSlider: {fileID: 6934545350848447285, guid: 76f600bc9d7c9154ba8f5a3867155f07,
     type: 3}
-  incrementValue: 5
+  incrementValue: 100
+--- !u!114 &-9029165373311081904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5074703432899532350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21312022144b56142ad4dcee3df53e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTimer: 3
+  callAttackTimer: 0.25
+  kickForce: 600
 --- !u!1 &5074703433225340091
 GameObject:
   m_ObjectHideFlags: 0

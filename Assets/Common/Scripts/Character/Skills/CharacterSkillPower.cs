@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using MadeInHouse.Powers;
 
 namespace MadeInHouse.Characters
 {
     public class CharacterSkillPower : CharacterSkill
     {
         protected Transform canvas;
+        protected CharacterPower power;
 
         [Header("Setup")]
         public Slider powerSlider;
@@ -23,8 +25,8 @@ namespace MadeInHouse.Characters
         {
             base.Initialize();
 
+            power = GetComponent<CharacterPower>();
             canvas = GameObject.Find("PlayerHud").transform;
-            var tempPos = powerSlider.GetComponent<RectTransform>().localPosition;
             powerSlider = Instantiate(powerSlider, canvas);
             powerSlider.maxValue = 100;
             powerSlider.value = 0;
@@ -37,6 +39,11 @@ namespace MadeInHouse.Characters
             if (powerSlider.value == powerSlider.maxValue)
             {
                 powerSlider.value = 0;
+
+                if (power != null)
+                {
+                    power.UsePower();
+                }
             }
         }
 

@@ -65,7 +65,7 @@ public class Cpu : MonoBehaviour {
                 minJumpDistance = 2.5f;
                 accuracy = 0.4f;
                 jumpDelay = 0.3f;
-                maxProtectedDistance = 1.5f;
+                maxProtectedDistance = 2.8f;
                 kickForce = 180;
                 break;
 
@@ -75,7 +75,7 @@ public class Cpu : MonoBehaviour {
                 minJumpDistance = 3.5f;
                 accuracy = 0.3f;
                 jumpDelay = 0.2f;
-                maxProtectedDistance = 2.25f;
+                maxProtectedDistance = 3.4f;
                 kickForce = 220;
                 break;
 
@@ -85,7 +85,7 @@ public class Cpu : MonoBehaviour {
                 minJumpDistance = 3.5f;
                 accuracy = 0.2f;
                 jumpDelay = 0.1f;
-                maxProtectedDistance = 3.25f;
+                maxProtectedDistance = 4.4f;
                 kickForce = 260;
                 break;
             case CpuLevels.veryHard:
@@ -94,7 +94,7 @@ public class Cpu : MonoBehaviour {
                 minJumpDistance = 3.5f;
                 accuracy = 0.15f;
                 jumpDelay = 0.05f;
-                maxProtectedDistance = 4f;
+                maxProtectedDistance = 5f;
                 kickForce = 280;
                 break;
 		}

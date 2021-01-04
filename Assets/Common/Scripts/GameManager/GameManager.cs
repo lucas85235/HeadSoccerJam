@@ -166,7 +166,7 @@ namespace MadeInHouse
 
         protected virtual void StopBallMovemnt()
         {
-            ball.rb.constraints = RigidbodyConstraints.FreezeAll;
+            ball.rb.isKinematic = true;
             ball.rb.useGravity = false;
             ball.rb.velocity = Vector3.zero;
             ball.rb.angularVelocity = Vector3.zero;
@@ -174,9 +174,7 @@ namespace MadeInHouse
 
         protected virtual void StartBallMovemnt()
         {
-            ball.rb.constraints = RigidbodyConstraints.None;
-            ball.rb.constraints = RigidbodyConstraints.FreezeRotation;
-            ball.rb.constraints = RigidbodyConstraints.FreezePositionZ;
+            ball.rb.isKinematic = false;
             ball.rb.useGravity = true;
         }
 

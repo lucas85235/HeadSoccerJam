@@ -400,7 +400,7 @@ MonoBehaviour:
   accuracy: 0
   maxProtectedDistance: 0
   kickForce: 0
-  cpuFieldLimits: {x: -1, y: 8.5}
+  cpuFieldLimits: {x: -1, y: 8}
   kickSound: {fileID: 8300000, guid: f780872264c350d459bfdd3dbec607d7, type: 3}
   headSound: {fileID: 8300000, guid: d48580c7f9bddcd418c6360df0720ef8, type: 3}
 --- !u!114 &7786293936871005875
