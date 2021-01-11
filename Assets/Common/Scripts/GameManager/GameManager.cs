@@ -45,7 +45,7 @@ namespace MadeInHouse
 
         protected virtual void Start()
         {
-            playerOne = Instantiate(playerOne, new Vector3(6, -0.2f, -2), Quaternion.identity);
+            playerOne = Instantiate(playerOne, new Vector3(6, -0.2f, -2), playerOne.rotation);
             playerTwo = Instantiate(playerTwo, new Vector3(-6, -0.2f, -2), Quaternion.identity);
             ball = Instantiate(ball, new Vector3(0, 3.75f, -2), Quaternion.identity);
             ResetPositions();

@@ -31,6 +31,8 @@ namespace MadeInHouse.Characters
             }
         }
 
+        // REMOVER PARA SKILL DE VIDA
+
         protected virtual void StartStunned()
         {
             Debug.Log("Start Stunned");

@@ -6,14 +6,14 @@ namespace MadeInHouse.Characters
 {
     public class CharacterSkillKick : CharacterSkill
     {
-        protected Animator anim;
         protected BallBehaviour ball;
+        protected DetectGround detectGround;
         protected CharacterSkillJump jumpSkill;
         protected float axisInput;
         protected bool canKick;
 
         [Header("Stats")]
-        [Range(140, 240)] public float kickForce = 180;
+        [Range(140, 300)] public float kickForce = 180;
         
         protected override void Start()
         {
@@ -24,9 +24,9 @@ namespace MadeInHouse.Characters
         protected override void Initialize()
         {
             base.Initialize();
-            anim = GetComponent<Animator>();
-            jumpSkill = GetComponent<CharacterSkillJump>();
             ball = FindObjectOfType<BallBehaviour>();
+            detectGround = FindObjectOfType<DetectGround>();
+            jumpSkill = GetComponent<CharacterSkillJump>();
         }
 
         public override void InputHandle()
@@ -36,10 +36,14 @@ namespace MadeInHouse.Characters
         }
 
         /// <summary> </summary>
-        public override void Skill()
+        public override void UseSkill()
         {
-            base.Skill();
-            anim.SetTrigger("Kick");
+            base.UseSkill();
+
+            if (anim != null)
+            {
+                anim.SetTrigger("Kick");
+            }
 
             if (canKick && ball != null)
             {
@@ -58,28 +62,33 @@ namespace MadeInHouse.Characters
                 Vector3 rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(-0.5f, -1f), 0);
 
                 // quando a bola só bate no jogador
-                if (jumpSkill.IsGrounded() && axisInput == 0)
+                if (detectGround.IsGrounded() && axisInput == 0)
                 {
                     rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), 0);
-                    Debug.Log("Kick 1");
+                    // Debug.Log("Kick 1");
                 }
                 // quando a bola bate no jogador e ele esta pulando
-                else if (!jumpSkill.IsGrounded() && axisInput == 0)
+                else if (!detectGround.IsGrounded() && axisInput == 0)
                 {
                     rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(1f, 1.5f), 0);
-                    Debug.Log("Kick 2");
+                    // Debug.Log("Kick 2");
                 }
                 // quando a bola bate no jogador e ele não esta pulando mas se movendo
-                else if (jumpSkill.IsGrounded() && axisInput != 0)
+                else if (detectGround.IsGrounded() && axisInput != 0)
                 {
                     rebound = new Vector3(Random.Range(1f, 1.5f), Random.Range(0.5f, 1f), 0);
-                    Debug.Log("Kick 3");
+                    // Debug.Log("Kick 3");
                 }
                 // quando a bola bate no jogador e ele esta pulando e se movendo
-                else if (!jumpSkill.IsGrounded() && axisInput != 0)
+                else if (!detectGround.IsGrounded() && axisInput != 0)
                 {
                     rebound = new Vector3(Random.Range(1f, 1.5f), Random.Range(0.5f, 1f), 0);
-                    Debug.Log("Kick 4");
+                    // Debug.Log("Kick 4");
+                }
+
+                if (characterIA != null)
+                {
+                    rebound.x = -rebound.x;
                 }
 
                 ball.BallRebound(rebound, kickForce);

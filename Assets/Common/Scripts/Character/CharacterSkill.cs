@@ -9,6 +9,8 @@ namespace MadeInHouse.Characters
 
     public class CharacterSkill : MonoBehaviour
     {
+        protected Animator anim;
+        protected CharacterIA characterIA;
         protected CharacterSkillPower skillPower;
 
         [Header("Feedbakcs")]
@@ -21,7 +23,9 @@ namespace MadeInHouse.Characters
 
         protected virtual void Initialize()
         {
+            anim = GetComponent<Animator>();
             skillPower = GetComponent<CharacterSkillPower>();
+            characterIA = GetComponent<CharacterIA>();
         }
 
         #region Input Handle
@@ -31,25 +35,27 @@ namespace MadeInHouse.Characters
 
         public virtual void InputHandle()
         {
+            if (characterIA != null) return;
+            
             if (InputAxis != null)
             {
                 if (InputAxis() != 0)
                 {
-                    Skill();
+                    UseSkill();
                 }
             }
             if (InputCode != null)
             {
                 if (InputCode())
                 {
-                    Skill();
+                    UseSkill();
                 }
             }
         }
 
         #endregion
 
-        public virtual void Skill()
+        public virtual void UseSkill()
         {
 
         }

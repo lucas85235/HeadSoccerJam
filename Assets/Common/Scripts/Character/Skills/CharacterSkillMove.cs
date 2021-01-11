@@ -21,11 +21,20 @@ namespace MadeInHouse.Characters
         {
             base.InputHandle();
             moveInput = new Vector3(InputSystem.Instance.AxisX(), 0);
+
+            if (moveInput.x != 0)
+            {
+                anim.SetBool("Move", true);
+            }
+            else
+            {
+                anim.SetBool("Move", false);
+            }
         }
 
-        public override void Skill()
+        public override void UseSkill()
         {
-            base.Skill();
+            base.UseSkill();
             transform.position += moveInput * moveSpeed * Time.deltaTime;
         }
 

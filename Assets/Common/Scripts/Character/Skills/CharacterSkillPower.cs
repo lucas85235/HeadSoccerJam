@@ -32,9 +32,9 @@ namespace MadeInHouse.Characters
             powerSlider.value = 0;
         }
 
-        public override void Skill()
+        public override void UseSkill()
         {
-            base.Skill();
+            base.UseSkill();
 
             if (powerSlider.value == powerSlider.maxValue)
             {

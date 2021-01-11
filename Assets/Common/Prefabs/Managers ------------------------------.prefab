@@ -44,6 +44,95 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: 1
+--- !u!1 &1706707497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1706707498}
+  - component: {fileID: 1706707499}
+  m_Layer: 0
+  m_Name: LevelLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1706707498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706707497}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2993158169297172357}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1706707499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706707497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1ec91151cc5484aa9cfcc15ee71ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1919308144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1919308145}
+  - component: {fileID: 1919308146}
+  m_Layer: 0
+  m_Name: LegendCoin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1919308145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919308144}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2993158169297172357}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1919308146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919308144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5fe1fee48dff74c87a1b9c04f3407c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinText: {fileID: 0}
+  currentLegendCoinAmount: 0
+  isReady: 0
 --- !u!1 &1936108743
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,21 +176,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1a0dc7cfded59459af63faebc061ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerOne: {fileID: 5074703432899532346, guid: 48f964f10584f4b4087336eee6c96333,
+  playerOne: {fileID: 4679113392219086584, guid: 67d978a2a8ed8874387e4e22947d3eee,
     type: 3}
-  playerTwo: {fileID: 7786293936871005871, guid: 719d2cbce1f2ca84ebd4a8d4c401f635,
+  playerTwo: {fileID: 7786293936871005871, guid: 53cdaa1e7b1eefb42b936d939a4290d3,
     type: 3}
   ball: {fileID: 308727819795058832, guid: d0b447bee3d21794aadfeb1e6e9636ee, type: 3}
   matchTime: 60
   restartMatchTimer: 1
   endMatchTimer: 1.25
   continueTimer: 2.5
+  autoContinueAfterEnd: 0
   goalAnimtion: {fileID: 0}
   hud:
     timerText: {fileID: 0}
     leftScoreText: {fileID: 0}
     rightScoreText: {fileID: 0}
     endMatchText: {fileID: 0}
+    coinEarnedText: {fileID: 0}
   matchSounds:
     startWhistle: {fileID: 8300000, guid: af4cb3494b96087428937c2348e754bd, type: 3}
     restartWhistle: {fileID: 8300000, guid: 1a5d0e636fa8d7246a717fbaefbf48e0, type: 3}
@@ -154,6 +245,8 @@ MonoBehaviour:
   axisY: Vertical
   jumpInput: 122
   kickInput: 120
+  powerInput: 101
+  interactInput: 102
 --- !u!1 &2993158169297172475
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +277,8 @@ Transform:
   - {fileID: 3859052100235324767}
   - {fileID: 1936108744}
   - {fileID: 1061353385}
+  - {fileID: 1919308145}
+  - {fileID: 1706707498}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

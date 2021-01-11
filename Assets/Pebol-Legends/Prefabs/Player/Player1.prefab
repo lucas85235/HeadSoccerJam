@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 1519222961926828175}
   - component: {fileID: -7192262245471101764}
   - component: {fileID: -9029165373311081904}
+  - component: {fileID: -4022557269000327128}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -241,7 +242,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeTimer: 3
   callAttackTimer: 0.25
-  kickForce: 600
+  kickForce: 800
+--- !u!114 &-4022557269000327128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5074703432899532350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f2e7a8a5390b541bfa2e9bc5b2dfde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerGround:
+    serializedVersion: 2
+    m_Bits: 256
+  isGround: 0
+  distToGround: 0
 --- !u!1 &5074703433225340091
 GameObject:
   m_ObjectHideFlags: 0
