@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4205640919551734759}
   - component: {fileID: 308727819795058832}
   - component: {fileID: 6838844462556428773}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -248,6 +248,8 @@ MonoBehaviour:
   layerGround:
     serializedVersion: 2
     m_Bits: 256
+  isGround: 0
+  distToGround: 0
 --- !u!1001 &4205640919457065836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -325,10 +327,25 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.47
       objectReference: {fileID: 0}
+    - target: {fileID: -5117700066308340382, guid: ae027cb491cd07e4e97d10e1420b095e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ae027cb491cd07e4e97d10e1420b095e,
         type: 3}
       propertyPath: m_Name
       value: soccer_ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ae027cb491cd07e4e97d10e1420b095e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821623529969584324, guid: ae027cb491cd07e4e97d10e1420b095e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae027cb491cd07e4e97d10e1420b095e, type: 3}

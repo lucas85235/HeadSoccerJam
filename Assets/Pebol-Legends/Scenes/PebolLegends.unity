@@ -733,7 +733,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4, y: 0.9, z: 8}
-  m_Center: {x: 1.5, y: -0.01, z: 0}
+  m_Center: {x: 2, y: -0.01, z: 0}
 --- !u!1 &482916066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,7 +1333,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4, y: 0.9, z: 8}
-  m_Center: {x: -1.5, y: -0.01, z: 0}
+  m_Center: {x: -2, y: -0.01, z: 0}
 --- !u!1 &801452175
 GameObject:
   m_ObjectHideFlags: 0
@@ -4676,6 +4676,11 @@ PrefabInstance:
       propertyPath: hud.coinEarnedText
       value: 
       objectReference: {fileID: 1750326834}
+    - target: {fileID: 1936108745, guid: 8ffd53b1c88b4cc42b73d17d2944f27c, type: 3}
+      propertyPath: playerOne
+      value: 
+      objectReference: {fileID: 5074703432899532346, guid: 48f964f10584f4b4087336eee6c96333,
+        type: 3}
     - target: {fileID: 2993158169297172357, guid: 8ffd53b1c88b4cc42b73d17d2944f27c,
         type: 3}
       propertyPath: m_LocalPosition.x

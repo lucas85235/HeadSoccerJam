@@ -13,7 +13,7 @@ namespace MadeInHouse.Characters
         protected Animator anim;
         protected BallBehaviour ball;
         protected DetectGround detectGround;
-        protected CharacterSkillKick skillKick;
+        protected CharacterSkillHeadButt skillHeadButt;
         protected CharacterSkillJump skillJump;
 
         protected bool canJump = true;
@@ -38,7 +38,7 @@ namespace MadeInHouse.Characters
             ball = FindObjectOfType<BallBehaviour>();
             detectGround = FindObjectOfType<DetectGround>();
 
-            skillKick = GetComponent<CharacterSkillKick>();
+            skillHeadButt = GetComponent<CharacterSkillHeadButt>();
             skillJump = GetComponent<CharacterSkillJump>();
 
             SetCpuLevel();
@@ -59,28 +59,28 @@ namespace MadeInHouse.Characters
                 case DifficultyLevels.easy:
                     moveSpeed = 6.0f;
                     maxProtectedDistance = 2.8f;
-                    skillKick.kickForce = 180;
+                    skillHeadButt.buttForce = 180;
                     SetJumpSettings(40f, 2.5f, 0.3f);
                     break;
 
                 case DifficultyLevels.normal:
                     moveSpeed = 8.0f;
                     maxProtectedDistance = 3.4f;
-                    skillKick.kickForce = 220;
+                    skillHeadButt.buttForce = 220;
                     SetJumpSettings(50f, 3.5f, 0.2f);
                     break;
 
                 case DifficultyLevels.hard:
                     moveSpeed = 10.0f;
                     maxProtectedDistance = 4.4f;
-                    skillKick.kickForce = 260;
+                    skillHeadButt.buttForce = 260;
                     SetJumpSettings(60f, 3.5f, 0.1f);
                     break;
 
                 case DifficultyLevels.veryHard:
                     moveSpeed = 13.0f;
                     maxProtectedDistance = 5f;
-                    skillKick.kickForce = 280;
+                    skillHeadButt.buttForce = 280;
                     SetJumpSettings(60f, 3.5f, 0.05f);
                     break;
             }

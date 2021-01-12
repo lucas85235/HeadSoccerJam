@@ -8,13 +8,14 @@ namespace MadeInHouse.Characters
     {
         protected BallBehaviour ball;
         protected DetectGround detectGround;
-        protected CharacterSkillJump jumpSkill;
         protected float axisInput;
-        protected bool canKick;
 
         [Header("Stats")]
         [Range(140, 300)] public float kickForce = 180;
         
+        [Header("Settings")]
+        public DetectCollision detectCollision;
+
         protected override void Start()
         {
             base.Start();
@@ -26,7 +27,6 @@ namespace MadeInHouse.Characters
             base.Initialize();
             ball = FindObjectOfType<BallBehaviour>();
             detectGround = FindObjectOfType<DetectGround>();
-            jumpSkill = GetComponent<CharacterSkillJump>();
         }
 
         public override void InputHandle()
@@ -44,71 +44,19 @@ namespace MadeInHouse.Characters
             {
                 anim.SetTrigger("Kick");
             }
+            
+            if (detectCollision != null && !detectCollision.isDetected) 
+            {
+                return;
+            }
 
-            if (canKick && ball != null)
+            if (ball != null)
             {
                 PlaySound();
-                Vector3 rebound = new Vector3(Random.Range(1.5f, 2f), Random.Range(-0.5f, -1f), 0);
+                Vector3 rebound = new Vector3(Random.Range(3.0f, 3.5f), Random.Range(0, 0.5f));
                 ball.rb.AddForce(rebound * kickForce, ForceMode.Force);
                 IncrementPower();
             }
-        }
-
-        protected virtual void OnCollisionEnter(Collision other)
-        {
-            if (other.gameObject.tag == "Ball")
-            {
-                canKick = true;
-                Vector3 rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(-0.5f, -1f), 0);
-
-                // quando a bola só bate no jogador
-                if (detectGround.IsGrounded() && axisInput == 0)
-                {
-                    rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), 0);
-                    // Debug.Log("Kick 1");
-                }
-                // quando a bola bate no jogador e ele esta pulando
-                else if (!detectGround.IsGrounded() && axisInput == 0)
-                {
-                    rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(1f, 1.5f), 0);
-                    // Debug.Log("Kick 2");
-                }
-                // quando a bola bate no jogador e ele não esta pulando mas se movendo
-                else if (detectGround.IsGrounded() && axisInput != 0)
-                {
-                    rebound = new Vector3(Random.Range(1f, 1.5f), Random.Range(0.5f, 1f), 0);
-                    // Debug.Log("Kick 3");
-                }
-                // quando a bola bate no jogador e ele esta pulando e se movendo
-                else if (!detectGround.IsGrounded() && axisInput != 0)
-                {
-                    rebound = new Vector3(Random.Range(1f, 1.5f), Random.Range(0.5f, 1f), 0);
-                    // Debug.Log("Kick 4");
-                }
-
-                if (characterIA != null)
-                {
-                    rebound.x = -rebound.x;
-                }
-
-                ball.BallRebound(rebound, kickForce);
-                IncrementPower();
-            }
-        }
-
-        protected virtual void OnCollisionExit(Collision other)
-        {
-            if (other.gameObject.tag == "Ball")
-            {
-                StartCoroutine(KickTimer());
-            }
-        }
-        
-        /// <summary> Tolerance to kick after collision exit  </summary>
-        protected virtual IEnumerator KickTimer()
-        {
-            yield return new WaitForSeconds(0.15f);
-            canKick = false;
         }
     }
 }

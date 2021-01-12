@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7786293935834768251}
   - component: {fileID: 7786293935834768248}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7786293935875343203}
   - component: {fileID: 7786293935875343200}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7786293936534574258}
   - component: {fileID: 7786293936534574259}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 7786293936871005874}
   - component: {fileID: 7786293936871005868}
   - component: {fileID: 7786293936871005875}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GPU
   m_TagString: Player2
   m_Icon: {fileID: 0}
