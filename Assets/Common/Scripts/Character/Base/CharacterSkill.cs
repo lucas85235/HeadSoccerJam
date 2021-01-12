@@ -12,6 +12,7 @@ namespace MadeInHouse.Characters
         protected Animator anim;
         protected CharacterIA characterIA;
         protected CharacterSkillPower skillPower;
+        protected bool canUseSkills = true;
 
         [Header("Feedbakcs")]
         public AudioClip skillSound;
@@ -35,6 +36,7 @@ namespace MadeInHouse.Characters
 
         public virtual void InputHandle()
         {
+            if (!canUseSkills) return;
             if (characterIA != null) return;
             
             if (InputAxis != null)
@@ -57,7 +59,7 @@ namespace MadeInHouse.Characters
 
         public virtual void UseSkill()
         {
-
+            if (!canUseSkills) return;
         }
 
         public virtual void PlaySound()

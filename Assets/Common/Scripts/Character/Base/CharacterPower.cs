@@ -18,7 +18,7 @@ namespace MadeInHouse.Powers
         protected virtual void Initialize()
         {
             ball = FindObjectOfType<BallBehaviour>();
-            character = FindObjectOfType<Character>();
+            character = GetComponent<Character>();
         }
 
         public virtual void UsePower()

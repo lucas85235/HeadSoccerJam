@@ -14,7 +14,9 @@ namespace MadeInHouse.Characters
         protected BallBehaviour ball;
         protected DetectGround detectGround;
         protected CharacterSkillHeadButt skillHeadButt;
+        protected CharacterSkillKick skillKick;
         protected CharacterSkillJump skillJump;
+        protected Transform player;
 
         protected bool canJump = true;
         protected float adjustingPosition;
@@ -32,6 +34,12 @@ namespace MadeInHouse.Characters
         [Header("Move Rules")]
         public Vector2 cpuFieldLimits = new Vector2(-1f, 8f);
 
+        [Header("Attack Rules")]
+        public float attackDistance = 2f;
+        public float attackCoolDown = 0.2f;
+
+        protected bool canAttack = true;
+
         protected virtual void Start()
         {
             anim = GetComponent<Animator>();
@@ -39,7 +47,10 @@ namespace MadeInHouse.Characters
             detectGround = FindObjectOfType<DetectGround>();
 
             skillHeadButt = GetComponent<CharacterSkillHeadButt>();
+            skillKick = GetComponent<CharacterSkillKick>();
             skillJump = GetComponent<CharacterSkillJump>();
+
+            player = GameObject.FindGameObjectWithTag("Player1").transform;
 
             SetCpuLevel();
         }
@@ -91,7 +102,25 @@ namespace MadeInHouse.Characters
             if (canMove)
             {
                 CpuMoveToBall();
+                CpuAttackPlayer();
             }
+        }
+
+        /// <summary> Cpu attack player </summary>
+        protected virtual void CpuAttackPlayer()
+        {
+            if (skillKick.playerCollision.isDetected && canAttack)
+            {
+                canAttack = false;
+                skillKick.UseSkill();
+                Invoke("AttackCoolDown", attackCoolDown);
+            }
+        }
+
+        /// <summary> Time between attacks </summary>
+        protected virtual void AttackCoolDown()
+        {
+            canAttack = true;
         }
 
         /// <summary> Main cpu play routines </summary>

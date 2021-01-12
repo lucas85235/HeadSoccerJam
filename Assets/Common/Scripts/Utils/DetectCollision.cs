@@ -10,12 +10,13 @@ namespace MadeInHouse
         public Transform owner;
         public float detectTimer = 0.2f;
 
-        [Header("Layers")]
-        public string[] detectingLayers;
+        [Header("Layer")]
+        public string detectingLayer;
 
         protected Collider detectCollider;
         protected bool detectCoolDown = true;
 
+        public Transform otherDetected { get; protected set; }
         public bool isDetected { get; protected set; }
 
         void Awake()
@@ -24,26 +25,25 @@ namespace MadeInHouse
             isDetected = false;
         }
 
-        protected virtual void OnTriggerStay(Collider other) 
+        protected virtual void OnTriggerStay(Collider other)
         {
-            foreach (var layer in detectingLayers)
+            if (other.gameObject.layer == LayerMask.NameToLayer(detectingLayer) && detectCoolDown)
             {
-                if (other.gameObject.layer == LayerMask.NameToLayer(layer) && detectCoolDown)
+                if (other.transform != owner || owner == null)
                 {
-                    if (other.transform != owner || owner == null)
-                    {
-                        detectCollider.enabled = false;
-                        detectCoolDown = false;
-                        isDetected = true;
+                    otherDetected = other.transform;
+                    detectCollider.enabled = false;
+                    detectCoolDown = false;
+                    isDetected = true;
 
-                        Invoke("DetectCoolDown", detectTimer);                    
-                    }
+                    Invoke("DetectCoolDown", detectTimer);
                 }
             }
         }
 
         protected virtual void DetectCoolDown()
         {
+            otherDetected = null;
             detectCollider.enabled = true;
             detectCoolDown = true;
             isDetected = false;

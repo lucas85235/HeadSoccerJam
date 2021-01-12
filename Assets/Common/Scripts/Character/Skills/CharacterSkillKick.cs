@@ -12,9 +12,10 @@ namespace MadeInHouse.Characters
 
         [Header("Stats")]
         [Range(140, 300)] public float kickForce = 180;
-        
+
         [Header("Settings")]
-        public DetectCollision detectCollision;
+        public DetectCollision ballCollision;
+        public DetectCollision playerCollision;
 
         protected override void Start()
         {
@@ -44,18 +45,34 @@ namespace MadeInHouse.Characters
             {
                 anim.SetTrigger("Kick");
             }
-            
-            if (detectCollision != null && !detectCollision.isDetected) 
+
+            if (playerCollision != null && playerCollision.isDetected)
             {
-                return;
+                KickOnPlayer();
             }
 
-            if (ball != null)
+            if (ballCollision != null && ballCollision.isDetected)
             {
-                PlaySound();
-                Vector3 rebound = new Vector3(Random.Range(3.0f, 3.5f), Random.Range(0, 0.5f));
-                ball.rb.AddForce(rebound * kickForce, ForceMode.Force);
-                IncrementPower();
+                if (ball != null)
+                {
+                    PlaySound();
+                    Vector3 rebound = new Vector3(Random.Range(3.0f, 3.5f), Random.Range(0, 0.5f));
+                    ball.rb.AddForce(rebound * kickForce, ForceMode.Force);
+                    IncrementPower();
+                }
+            }
+        }
+
+        protected virtual void KickOnPlayer()
+        {
+            if (playerCollision.otherDetected != null)
+            {
+                var life = playerCollision.otherDetected.GetComponent<CharacterSkillLife>();
+
+                if (life != null)
+                {
+                    life.UseSkill();
+                }
             }
         }
     }
