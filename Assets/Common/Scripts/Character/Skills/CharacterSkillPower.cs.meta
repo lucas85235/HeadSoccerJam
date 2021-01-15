@@ -3,7 +3,10 @@ guid: 61240d00bf287434ea218d2fa9eecc4c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - skillSound: {instanceID: 0}
+  - powerSlider: {fileID: 6934545350848447285, guid: 76f600bc9d7c9154ba8f5a3867155f07,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

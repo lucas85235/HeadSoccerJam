@@ -14,6 +14,7 @@ namespace MadeInHouse.Characters
         [Header("Setup")]
         public Slider powerSlider;
         public int incrementValue = 1;
+        public float maxPower = 100f;
 
         protected override void Start()
         {
@@ -28,13 +29,15 @@ namespace MadeInHouse.Characters
             power = GetComponent<CharacterPower>();
             canvas = GameObject.Find("PlayerHud").transform;
             powerSlider = Instantiate(powerSlider, canvas);
-            powerSlider.maxValue = 100;
+            powerSlider.maxValue = maxPower;
             powerSlider.value = 0;
         }
 
-        public override void Skill()
+        public override void UseSkill()
         {
-            base.Skill();
+            base.UseSkill();
+
+            if (!canUseSkills) return;
 
             if (powerSlider.value == powerSlider.maxValue)
             {

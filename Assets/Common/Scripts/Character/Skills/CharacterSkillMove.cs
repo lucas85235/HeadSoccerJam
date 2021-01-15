@@ -21,20 +21,24 @@ namespace MadeInHouse.Characters
         {
             base.InputHandle();
             moveInput = new Vector3(InputSystem.Instance.AxisX(), 0);
-        }
 
-        public override void Skill()
-        {
-            base.Skill();
-            transform.position += moveInput * moveSpeed * Time.deltaTime;
-        }
-
-        protected virtual void OnCollisionEnter(Collision other)
-        {
-            if (other.gameObject.tag == "Ball") 
+            if (moveInput.x != 0)
             {
-                PlaySound();
+                anim.SetBool("Move", true);
             }
+            else
+            {
+                anim.SetBool("Move", false);
+            }
+        }
+
+        public override void UseSkill()
+        {
+            base.UseSkill();
+
+            if (!canUseSkills) return;
+
+            transform.position += moveInput * moveSpeed * Time.deltaTime;
         }
     }
 }
