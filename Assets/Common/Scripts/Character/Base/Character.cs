@@ -31,19 +31,12 @@ namespace MadeInHouse.Characters
             }
         }
 
-        // REMOVER PARA SKILL DE VIDA
-
-        protected virtual void StartStunned()
+        public virtual void SetCanUseSkills(bool state)
         {
-            Debug.Log("Start Stunned");
-            isStunned = true;
-            Invoke("CancelStunned", stunnedTime);
-        }
-
-        protected virtual void CancelStunned()
-        {
-            Debug.Log("Cancel Stunned");
-            isStunned = false;
+            foreach (var skill in skills)
+            {
+                skill.canUseSkills = state;
+            }
         }
     }    
 }

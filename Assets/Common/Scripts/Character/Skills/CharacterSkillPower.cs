@@ -37,6 +37,8 @@ namespace MadeInHouse.Characters
         {
             base.UseSkill();
 
+            if (!canUseSkills) return;
+
             if (powerSlider.value == powerSlider.maxValue)
             {
                 powerSlider.value = 0;

@@ -12,7 +12,8 @@ namespace MadeInHouse.Characters
         protected Animator anim;
         protected CharacterIA characterIA;
         protected CharacterSkillPower skillPower;
-        protected bool canUseSkills = true;
+        
+        [HideInInspector] public bool canUseSkills = true;
 
         [Header("Feedbakcs")]
         public AudioClip skillSound;

@@ -41,6 +41,8 @@ namespace MadeInHouse.Characters
         {
             base.UseSkill();
 
+            if (!canUseSkills) return;
+            
             if (anim != null)
             {
                 anim.SetTrigger("Kick");

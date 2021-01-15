@@ -31,6 +31,9 @@ namespace MadeInHouse.Characters
         public override void UseSkill()
         {
             base.UseSkill();
+
+            if (!canUseSkills) return;
+
             if (detectGround.IsGrounded())
             {
                 if (anim != null)

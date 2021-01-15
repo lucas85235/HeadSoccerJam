@@ -28,6 +28,8 @@ namespace MadeInHouse.Characters
 
         protected virtual void OnCollisionEnter(Collision other)
         {
+            if (!canUseSkills) return;
+            
             if (other.gameObject.tag == "Ball")
             {
                 Vector3 rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(-0.5f, -1f), 0);

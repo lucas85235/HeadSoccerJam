@@ -7,6 +7,8 @@ namespace MadeInHouse.Characters
 {
     public class CharacterSkillLife : CharacterSkill
     {
+        protected Character character;
+
         [Header("Life Setup")]
         public Slider lifeSlider;
         public int maxLife = 5;
@@ -20,6 +22,9 @@ namespace MadeInHouse.Characters
         protected override void Initialize()
         {
             base.Initialize();
+
+            character = GetComponent<Character>();
+
             var canvas = GameObject.Find("PlayerHud").transform;
             lifeSlider = Instantiate(lifeSlider, canvas);
             lifeSlider.maxValue = maxLife;
@@ -42,14 +47,14 @@ namespace MadeInHouse.Characters
         protected virtual void Knockout()
         {
             isKnockout = true;
-            canUseSkills = false;
+            character.SetCanUseSkills(false);
             Invoke("Revive", knockoutTimer);
         }
 
         protected virtual void Revive()
         {
-            canUseSkills = true;
             lifeSlider.value = maxLife;
+            character.SetCanUseSkills(true);
             Invoke("ResetKnockout", invencibleTimer);
         }
 

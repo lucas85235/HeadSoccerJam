@@ -13,14 +13,12 @@ namespace MadeInHouse.Characters
         protected Animator anim;
         protected BallBehaviour ball;
         protected DetectGround detectGround;
+        protected CharacterSkill characterSkill;
         protected CharacterSkillHeadButt skillHeadButt;
         protected CharacterSkillKick skillKick;
         protected CharacterSkillJump skillJump;
-        protected Transform player;
 
-        protected bool canJump = true;
-        protected float adjustingPosition;
-        protected bool canMove = true;
+        protected bool canAttack = true;
 
         [Header("AI Difficulty Levels")]
         public DifficultyLevels cpuLevel = DifficultyLevels.easy;
@@ -30,15 +28,12 @@ namespace MadeInHouse.Characters
         [SerializeField] protected float minJumpDistance;
         [SerializeField] protected float jumpDelay;
         [SerializeField] protected float maxProtectedDistance;
+        [SerializeField] protected float attackCoolDown = 0.2f;
 
         [Header("Move Rules")]
         public Vector2 cpuFieldLimits = new Vector2(-1f, 8f);
 
-        [Header("Attack Rules")]
-        public float attackDistance = 2f;
-        public float attackCoolDown = 0.2f;
-
-        protected bool canAttack = true;
+        public bool canMove { get; set; }
 
         protected virtual void Start()
         {
@@ -46,11 +41,12 @@ namespace MadeInHouse.Characters
             ball = FindObjectOfType<BallBehaviour>();
             detectGround = FindObjectOfType<DetectGround>();
 
+            characterSkill = GetComponent<CharacterSkill>();
             skillHeadButt = GetComponent<CharacterSkillHeadButt>();
             skillKick = GetComponent<CharacterSkillKick>();
             skillJump = GetComponent<CharacterSkillJump>();
 
-            player = GameObject.FindGameObjectWithTag("Player1").transform;
+            canMove = true;
 
             SetCpuLevel();
         }
@@ -71,6 +67,7 @@ namespace MadeInHouse.Characters
                     moveSpeed = 6.0f;
                     maxProtectedDistance = 2.8f;
                     skillHeadButt.buttForce = 180;
+                    attackCoolDown = 0.6f;
                     SetJumpSettings(40f, 2.5f, 0.3f);
                     break;
 
@@ -78,6 +75,7 @@ namespace MadeInHouse.Characters
                     moveSpeed = 8.0f;
                     maxProtectedDistance = 3.4f;
                     skillHeadButt.buttForce = 220;
+                    attackCoolDown = 0.5f;
                     SetJumpSettings(50f, 3.5f, 0.2f);
                     break;
 
@@ -85,6 +83,7 @@ namespace MadeInHouse.Characters
                     moveSpeed = 10.0f;
                     maxProtectedDistance = 4.4f;
                     skillHeadButt.buttForce = 260;
+                    attackCoolDown = 0.4f;
                     SetJumpSettings(60f, 3.5f, 0.1f);
                     break;
 
@@ -92,6 +91,7 @@ namespace MadeInHouse.Characters
                     moveSpeed = 13.0f;
                     maxProtectedDistance = 5f;
                     skillHeadButt.buttForce = 280;
+                    attackCoolDown = 0.3f;
                     SetJumpSettings(60f, 3.5f, 0.05f);
                     break;
             }
@@ -101,6 +101,11 @@ namespace MadeInHouse.Characters
         {
             if (canMove)
             {
+                if (!characterSkill.canUseSkills)
+                {
+                    return;
+                }
+
                 CpuMoveToBall();
                 CpuAttackPlayer();
             }
@@ -126,13 +131,18 @@ namespace MadeInHouse.Characters
         /// <summary> Main cpu play routines </summary>
         protected virtual void CpuMoveToBall()
         {
+            if (!characterSkill.canUseSkills)
+            {
+                return;
+            }
+
             if (ball.transform.position.x > cpuFieldLimits.x && ball.transform.position.x < cpuFieldLimits.y)
             {
                 //move the cpu towards the ball
 
                 var smoothStep = Mathf.SmoothStep(
-                    transform.position.x, 
-                    ball.transform.position.x + adjustingPosition, 
+                    transform.position.x,
+                    ball.transform.position.x,
                     Time.fixedDeltaTime * moveSpeed);
 
                 transform.position = new Vector3(
@@ -144,8 +154,8 @@ namespace MadeInHouse.Characters
             if (ball.transform.position.x < cpuFieldLimits.x)
             {
                 var smoothStep = Mathf.SmoothStep(
-                    transform.position.x, 
-                    maxProtectedDistance, 
+                    transform.position.x,
+                    maxProtectedDistance,
                     Time.fixedDeltaTime * moveSpeed);
 
                 transform.position = new Vector3(
@@ -158,6 +168,8 @@ namespace MadeInHouse.Characters
         /// <summary> Shoot the ball upon collision </summary>
         protected virtual void OnCollisionEnter(Collision other)
         {
+            if (!characterSkill.canUseSkills) return;
+
             if (other.gameObject.tag == "Ball")
             {
                 anim.SetTrigger("Kick");

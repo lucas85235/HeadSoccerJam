@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539076f89fa3a304a956aaed0892aa05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 0}
   jumpForce: 40
 --- !u!114 &4496138287620806301
@@ -199,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02db1852a1a7fb944909a7d5d8dcad49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 8300000, guid: 251c638ff709cd747a665d54e0efb142, type: 3}
   kickForce: 180
   ballCollision: {fileID: 6115195273131202818}
@@ -215,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625e31629b85e2c47b64cebe822bea9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 8300000, guid: d48580c7f9bddcd418c6360df0720ef8, type: 3}
   buttForce: 180
 --- !u!114 &1519222961926828175
@@ -229,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92f4cef437ca0d44a85a047e9afb0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 0}
   moveSpeed: 7
 --- !u!114 &8933983598711087151
@@ -243,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d2e85d300e70744a241b4e755a53c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 0}
   lifeSlider: {fileID: 883430605391499392, guid: 5670dfa171ce71243bd23ccb7ef37865,
     type: 3}
@@ -278,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61240d00bf287434ea218d2fa9eecc4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 0}
   powerSlider: {fileID: 6934545350848447285, guid: 76f600bc9d7c9154ba8f5a3867155f07,
     type: 3}

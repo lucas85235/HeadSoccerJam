@@ -35,15 +35,10 @@ namespace MadeInHouse.Characters
         public override void UseSkill()
         {
             base.UseSkill();
-            transform.position += moveInput * moveSpeed * Time.deltaTime;
-        }
 
-        protected virtual void OnCollisionEnter(Collision other)
-        {
-            if (other.gameObject.tag == "Ball") 
-            {
-                PlaySound();
-            }
+            if (!canUseSkills) return;
+
+            transform.position += moveInput * moveSpeed * Time.deltaTime;
         }
     }
 }

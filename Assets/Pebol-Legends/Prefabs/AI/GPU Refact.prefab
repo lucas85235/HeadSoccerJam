@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3321383034773719275}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: -2}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 0.79999995, y: 0.79999995, z: 0.79999995}
   m_Children:
   - {fileID: 6224448723837537376}
@@ -533,7 +533,7 @@ MonoBehaviour:
   maxProtectedDistance: 0
   cpuFieldLimits: {x: -1, y: 8}
   attackDistance: 2
-  attackCoolDown: 0.2
+  attackCoolDown: 0.6
 --- !u!114 &-841031611453848064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,6 +558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02db1852a1a7fb944909a7d5d8dcad49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 8300000, guid: 251c638ff709cd747a665d54e0efb142, type: 3}
   kickForce: 180
   ballCollision: {fileID: 8993274458768899621}
@@ -574,6 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625e31629b85e2c47b64cebe822bea9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 8300000, guid: d48580c7f9bddcd418c6360df0720ef8, type: 3}
   buttForce: 180
 --- !u!114 &-1604886550728449628
@@ -588,6 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539076f89fa3a304a956aaed0892aa05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 0}
   jumpForce: 40
 --- !u!114 &233255929850602535
@@ -602,6 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d2e85d300e70744a241b4e755a53c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 0}
   lifeSlider: {fileID: 883430605391499392, guid: 34079fddd6a78e649abd9d4bd65ad353,
     type: 3}
@@ -637,6 +641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61240d00bf287434ea218d2fa9eecc4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseSkills: 1
   skillSound: {fileID: 0}
   powerSlider: {fileID: 6934545350848447285, guid: b5f204c22cd2362488dce8fbdc130053,
     type: 3}
