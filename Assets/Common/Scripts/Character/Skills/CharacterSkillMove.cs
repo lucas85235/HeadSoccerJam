@@ -10,6 +10,7 @@ namespace MadeInHouse.Characters
 
         [Header("Stats")]
         [Range(4, 10)] public float moveSpeed = 7;
+        [Range(2, 4)] public float animSmooth = 3;
 
         protected override void Start()
         {
@@ -21,15 +22,9 @@ namespace MadeInHouse.Characters
         {
             base.InputHandle();
             moveInput = new Vector3(InputSystem.Instance.AxisX(), 0);
-
-            if (moveInput.x != 0)
-            {
-                anim.SetBool("Move", true);
-            }
-            else
-            {
-                anim.SetBool("Move", false);
-            }
+            
+            var speed = moveInput.x < 1 ? moveInput.x * animSmooth : moveInput.x;
+            anim.SetFloat("Speed", speed);
         }
 
         public override void UseSkill()

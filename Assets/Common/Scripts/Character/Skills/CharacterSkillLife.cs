@@ -46,6 +46,11 @@ namespace MadeInHouse.Characters
 
         protected virtual void Knockout()
         {
+            if (anim != null)
+            {
+                anim.SetTrigger("Fallen");
+            }
+
             isKnockout = true;
             character.SetCanUseSkills(false);
             Invoke("Revive", knockoutTimer);
@@ -53,6 +58,11 @@ namespace MadeInHouse.Characters
 
         protected virtual void Revive()
         {
+            if (anim != null)
+            {
+                anim.SetTrigger("FallenExit");
+            }
+
             lifeSlider.value = maxLife;
             character.SetCanUseSkills(true);
             Invoke("ResetKnockout", invencibleTimer);

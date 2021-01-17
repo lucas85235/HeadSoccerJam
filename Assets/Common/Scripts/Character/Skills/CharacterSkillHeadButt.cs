@@ -32,6 +32,7 @@ namespace MadeInHouse.Characters
             
             if (other.gameObject.tag == "Ball")
             {
+                PlaySound();
                 Vector3 rebound = new Vector3(Random.Range(0.5f, 1f), Random.Range(-0.5f, -1f), 0);
 
                 // quando a bola só bate no jogador

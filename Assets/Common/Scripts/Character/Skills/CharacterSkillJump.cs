@@ -11,13 +11,30 @@ namespace MadeInHouse.Characters
         protected Rigidbody rb;
         protected DetectGround detectGround;
 
+        protected bool canJump = true;
+        protected bool inJump = false;
+
         [Header("Stats")]
         [Range(30, 60)] public float jumpForce = 40;
+        public float jumpDelay = 0.1f;
 
         protected override void Start()
         {
             base.Start();
             InputCode = InputSystem.Instance.Jump;
+        }
+
+        protected virtual void FixedUpdate()
+        {
+            if (detectGround.IsGrounded() && inJump)
+            {
+                inJump = false;
+
+                if (anim != null)
+                {
+                    anim.SetTrigger("JumpExit");
+                }
+            }
         }
 
         protected override void Initialize()
@@ -34,15 +51,23 @@ namespace MadeInHouse.Characters
 
             if (!canUseSkills) return;
 
-            if (detectGround.IsGrounded())
+            if (detectGround.IsGrounded() && !inJump)
             {
+                canJump = false;
+                inJump = true;
+
                 if (anim != null)
                 {
                     anim.SetTrigger("Jump");
-                }
-                
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                }    
+
+                Invoke("StartJump", jumpDelay);
             }
         }
-    } 
+
+        protected virtual void StartJump()
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+    }
 }

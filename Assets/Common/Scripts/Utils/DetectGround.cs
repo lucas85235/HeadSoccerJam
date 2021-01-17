@@ -16,7 +16,10 @@ namespace MadeInHouse
 
         protected virtual void Start()
         {
-            distToGround = GetComponent<Collider>().bounds.extents.y;
+            if (distToGround == 0)
+            {
+                distToGround = GetComponent<Collider>().bounds.extents.y;
+            }
         }
 
         /// <summary> Detect contact with ground </summary>
