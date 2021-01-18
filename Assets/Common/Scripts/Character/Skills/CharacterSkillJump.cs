@@ -11,8 +11,9 @@ namespace MadeInHouse.Characters
         protected Rigidbody rb;
         protected DetectGround detectGround;
 
-        protected bool canJump = true;
         protected bool inJump = false;
+        protected bool canJump = true;
+        protected float jumpCoolDown = 0.3f;
 
         [Header("Stats")]
         [Range(30, 60)] public float jumpForce = 40;
@@ -51,9 +52,10 @@ namespace MadeInHouse.Characters
 
             if (!canUseSkills) return;
 
-            if (detectGround.IsGrounded() && !inJump)
+            if (detectGround.IsGrounded() && !inJump && canJump)
             {
                 canJump = false;
+                StartCoroutine("JumpCoolDown");
                 inJump = true;
 
                 if (anim != null)
@@ -63,6 +65,13 @@ namespace MadeInHouse.Characters
 
                 Invoke("StartJump", jumpDelay);
             }
+        }
+
+        protected virtual IEnumerator JumpCoolDown()
+        {
+            yield return new WaitForSeconds(jumpCoolDown);
+            yield return new WaitUntil( () => detectGround.IsGrounded() );
+            canJump = true;
         }
 
         protected virtual void StartJump()

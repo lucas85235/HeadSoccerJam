@@ -231,8 +231,9 @@ MonoBehaviour:
   lifeSlider: {fileID: 883430605391499392, guid: 5670dfa171ce71243bd23ccb7ef37865,
     type: 3}
   maxLife: 5
-  knockoutTimer: 1.5
+  knockoutTimer: 2
   invencibleTimer: 0.5
+  reviveAnimCompensationTimer: 0.75
 --- !u!114 &967639064743247646
 MonoBehaviour:
   m_ObjectHideFlags: 0
