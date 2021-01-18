@@ -9,9 +9,11 @@ namespace MadeInHouse.Characters
         protected BallBehaviour ball;
         protected DetectGround detectGround;
         protected float axisInput;
+        protected bool canKick = true;
 
         [Header("Stats")]
         [Range(140, 300)] public float kickForce = 180;
+        public float kickCoolDown = 0.3f;
 
         [Header("Settings")]
         public DetectCollision ballCollision;
@@ -43,6 +45,13 @@ namespace MadeInHouse.Characters
 
             if (!canUseSkills) return;
             
+            if (canKick)
+            {
+                canKick = false;
+                Invoke("KickCoolDown", kickCoolDown);
+            }
+            else return;
+            
             if (anim != null)
             {
                 anim.SetTrigger("Kick");
@@ -59,6 +68,7 @@ namespace MadeInHouse.Characters
                 {
                     PlaySound();
                     Vector3 rebound = new Vector3(Random.Range(3.0f, 3.5f), Random.Range(0, 0.5f));
+                    ball.rb.velocity = Vector2.zero;
                     ball.rb.AddForce(rebound * kickForce, ForceMode.Force);
                     IncrementPower();
                 }
@@ -76,6 +86,11 @@ namespace MadeInHouse.Characters
                     life.UseSkill();
                 }
             }
+        }
+
+        protected virtual void KickCoolDown()
+        {
+            canKick = true;
         }
     }
 }

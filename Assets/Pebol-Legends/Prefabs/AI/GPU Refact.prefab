@@ -531,9 +531,8 @@ MonoBehaviour:
   minJumpDistance: 0
   jumpDelay: 0
   maxProtectedDistance: 0
-  cpuFieldLimits: {x: -1, y: 8}
-  attackDistance: 2
   attackCoolDown: 0.6
+  cpuFieldLimits: {x: -1, y: 8}
 --- !u!114 &-841031611453848064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9673aa9cbfb11543a30ac90192a052f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 7786293936871005871}
 --- !u!114 &627700614836277659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +593,7 @@ MonoBehaviour:
   canUseSkills: 1
   skillSound: {fileID: 0}
   jumpForce: 40
+  jumpDelay: 0.1
 --- !u!114 &233255929850602535
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ namespace MadeInHouse.Characters
     public class CharacterSkill : MonoBehaviour
     {
         protected Animator anim;
+        protected Character character;
         protected CharacterIA characterIA;
         protected CharacterSkillPower skillPower;
         
@@ -25,9 +26,11 @@ namespace MadeInHouse.Characters
 
         protected virtual void Initialize()
         {
-            anim = GetComponent<Animator>();
+            character = GetComponent<Character>();
             skillPower = GetComponent<CharacterSkillPower>();
             characterIA = GetComponent<CharacterIA>();
+            anim = character.model.GetComponent<Animator>();
+
         }
 
         #region Input Handle

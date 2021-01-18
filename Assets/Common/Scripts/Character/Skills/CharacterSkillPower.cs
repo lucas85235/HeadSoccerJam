@@ -13,7 +13,7 @@ namespace MadeInHouse.Characters
 
         [Header("Setup")]
         public Slider powerSlider;
-        public int incrementValue = 1;
+        public int incrementValue = 15;
         public float maxPower = 100f;
 
         protected override void Start()

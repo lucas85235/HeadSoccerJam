@@ -3,7 +3,10 @@ guid: 23d2e85d300e70744a241b4e755a53c7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - skillSound: {instanceID: 0}
+  - lifeSlider: {fileID: 883430605391499392, guid: 5670dfa171ce71243bd23ccb7ef37865,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -7,8 +7,6 @@ namespace MadeInHouse.Characters
 {
     public class CharacterSkillLife : CharacterSkill
     {
-        protected Character character;
-
         [Header("Life Setup")]
         public Slider lifeSlider;
         public int maxLife = 5;
@@ -16,14 +14,13 @@ namespace MadeInHouse.Characters
         [Header("Knockout Setup")]
         public float knockoutTimer = 1.5f;
         public float invencibleTimer = 0.5f;
+        public float reviveAnimCompensationTimer = 0.5f;
 
         protected bool isKnockout = false;
 
         protected override void Initialize()
         {
             base.Initialize();
-
-            character = GetComponent<Character>();
 
             var canvas = GameObject.Find("PlayerHud").transform;
             lifeSlider = Instantiate(lifeSlider, canvas);
@@ -46,8 +43,15 @@ namespace MadeInHouse.Characters
 
         protected virtual void Knockout()
         {
+            if (anim != null)
+            {
+                anim.SetTrigger("Fallen");
+            }
+
             isKnockout = true;
             character.SetCanUseSkills(false);
+
+            Invoke("ReviveAnimation", knockoutTimer - reviveAnimCompensationTimer);
             Invoke("Revive", knockoutTimer);
         }
 
@@ -55,7 +59,16 @@ namespace MadeInHouse.Characters
         {
             lifeSlider.value = maxLife;
             character.SetCanUseSkills(true);
+
             Invoke("ResetKnockout", invencibleTimer);
+        }
+
+        protected virtual void ReviveAnimation()
+        {
+            if (anim != null)
+            {
+                anim.SetTrigger("FallenExit");
+            }
         }
 
         protected virtual void ResetKnockout()

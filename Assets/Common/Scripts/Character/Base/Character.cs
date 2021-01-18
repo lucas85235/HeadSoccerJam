@@ -11,6 +11,9 @@ namespace MadeInHouse.Characters
         protected float stunnedTime = 3f;
         protected bool isStunned = false;
 
+        [Header("Setup")]
+        public Transform model;
+
         void Start()
         {
             skills = GetComponents<CharacterSkill>();
