@@ -19,6 +19,7 @@ namespace MadeInHouse.Characters
         protected CharacterSkillJump skillJump;
 
         protected bool canAttack = true;
+        public Vector3 lastPosition;
 
         [Header("AI Difficulty Levels")]
         public DifficultyLevels cpuLevel = DifficultyLevels.easy;
@@ -37,7 +38,7 @@ namespace MadeInHouse.Characters
 
         protected virtual void Start()
         {
-            anim = GetComponent<Animator>();
+            anim = GetComponent<Character>().model.GetComponent<Animator>();
             ball = FindObjectOfType<BallBehaviour>();
             detectGround = FindObjectOfType<DetectGround>();
 
@@ -47,6 +48,7 @@ namespace MadeInHouse.Characters
             skillJump = GetComponent<CharacterSkillJump>();
 
             canMove = true;
+            lastPosition = transform.position;
 
             SetCpuLevel();
         }
@@ -149,6 +151,14 @@ namespace MadeInHouse.Characters
                     smoothStep,
                     transform.position.y,
                     transform.position.z);
+
+                if (transform.position.x < lastPosition.x)
+                {
+                    anim.SetFloat("Speed", smoothStep);
+                }
+                else anim.SetFloat("Speed", -smoothStep);
+
+                lastPosition = transform.position;
             }
 
             if (ball.transform.position.x < cpuFieldLimits.x)

@@ -139,9 +139,9 @@ GameObject:
   - component: {fileID: 967639064743247647}
   - component: {fileID: 967639064743247645}
   - component: {fileID: 967639064743247644}
+  - component: {fileID: 111942591209760161}
   - component: {fileID: 967639064743247641}
   - component: {fileID: 967639064743247655}
-  - component: {fileID: 967639064743247646}
   - component: {fileID: 967639064743247642}
   - component: {fileID: 5629429141272701174}
   - component: {fileID: 967639064743247640}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 967639064743247652}
   - component: {fileID: 967639064743247653}
   m_Layer: 9
-  m_Name: Player-3D-Mixamo
+  m_Name: CPU-Refact-IA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967639064743247634}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -5, y: -0.85, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -170,7 +170,7 @@ Transform:
   - {fileID: 967639064565041436}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &967639064743247645
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -201,6 +201,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.95, z: 0}
+--- !u!114 &111942591209760161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967639064743247634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567ae34b9f16bbc46b20c92fd9db15ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastPosition: {x: 0, y: 0, z: 0}
+  cpuLevel: 2
+  moveSpeed: 0
+  minJumpDistance: 0
+  jumpDelay: 0
+  maxProtectedDistance: 0
+  attackCoolDown: 0.6
+  cpuFieldLimits: {x: -1, y: 8}
 --- !u!114 &967639064743247641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,28 +248,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canUseSkills: 1
   skillSound: {fileID: 0}
-  lifeSlider: {fileID: 883430605391499392, guid: 5670dfa171ce71243bd23ccb7ef37865,
+  lifeSlider: {fileID: 883430605391499392, guid: 34079fddd6a78e649abd9d4bd65ad353,
     type: 3}
   maxLife: 5
   knockoutTimer: 2
   invencibleTimer: 0.5
   reviveAnimCompensationTimer: 0.75
---- !u!114 &967639064743247646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967639064743247634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b92f4cef437ca0d44a85a047e9afb0e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canUseSkills: 1
-  skillSound: {fileID: 0}
-  moveSpeed: 6
-  animSmooth: 3
 --- !u!114 &967639064743247642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canUseSkills: 1
   skillSound: {fileID: 0}
-  powerSlider: {fileID: 6934545350848447285, guid: 76f600bc9d7c9154ba8f5a3867155f07,
+  powerSlider: {fileID: 6934545350848447285, guid: b5f204c22cd2362488dce8fbdc130053,
     type: 3}
   incrementValue: 25
   maxPower: 100
@@ -492,7 +496,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0beffd500e6ebf949b9184ec558d197a, type: 2}
+      objectReference: {fileID: 2100000, guid: 6d771d2ca45c34441a308aaea9acfd64, type: 2}
     - target: {fileID: 919132149155446097, guid: bee39b6a60add7c4eaf4d8b02168f3d9,
         type: 3}
       propertyPath: m_Name

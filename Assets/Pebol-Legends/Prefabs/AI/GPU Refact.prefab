@@ -391,7 +391,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7786293936871005867}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 5, y: -0.2, z: -2}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
@@ -400,7 +400,7 @@ Transform:
   - {fileID: 7786293936534574258}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &7786293936871005870
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -561,6 +561,7 @@ MonoBehaviour:
   canUseSkills: 1
   skillSound: {fileID: 8300000, guid: 251c638ff709cd747a665d54e0efb142, type: 3}
   kickForce: 180
+  kickCoolDown: 0.3
   ballCollision: {fileID: 8993274458768899621}
   playerCollision: {fileID: 6625989439429919799}
 --- !u!114 &5290123761662334506
@@ -613,6 +614,7 @@ MonoBehaviour:
   maxLife: 5
   knockoutTimer: 1.5
   invencibleTimer: 0.5
+  reviveAnimCompensationTimer: 0.5
 --- !u!114 &3772757488492525891
 MonoBehaviour:
   m_ObjectHideFlags: 0
