@@ -83,7 +83,7 @@ namespace MadeInHouse.Characters
 
                 if (life != null)
                 {
-                    life.UseSkill();
+                    life.DecreaseLife();
                 }
             }
         }

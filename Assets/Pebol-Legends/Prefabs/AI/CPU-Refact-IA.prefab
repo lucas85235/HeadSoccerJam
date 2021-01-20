@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 967639064743247653}
   m_Layer: 9
   m_Name: CPU-Refact-IA
-  m_TagString: Untagged
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
