@@ -43,6 +43,16 @@ namespace MadeInHouse.Characters
         public virtual void SetMaxLife()
         {
             lifeSlider.value = maxLife;
+
+            if (isKnockout)
+            {
+                extendKnockTimer = false;
+                
+                CancelInvoke();
+
+                Invoke("ReviveAnimation", 0f);
+                Invoke("Revive", reviveAnimCompensationTimer);
+            }
         }
 
         public virtual void DecreaseLife(int decrease = 1)
