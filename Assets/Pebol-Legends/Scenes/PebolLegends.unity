@@ -4693,7 +4693,7 @@ PrefabInstance:
     - target: {fileID: 1936108745, guid: 8ffd53b1c88b4cc42b73d17d2944f27c, type: 3}
       propertyPath: playerOne
       value: 
-      objectReference: {fileID: 5928698702107285784, guid: bbc53a5045b785547a7956d190f0998d,
+      objectReference: {fileID: 967639064743247647, guid: 8f2628b8a252a54469fc1c037462274e,
         type: 3}
     - target: {fileID: 1936108745, guid: 8ffd53b1c88b4cc42b73d17d2944f27c, type: 3}
       propertyPath: m_Enabled
