@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 967639064743247640}
   - component: {fileID: 967639064743247643}
   - component: {fileID: 967639064743247652}
-  - component: {fileID: 967639064743247653}
+  - component: {fileID: -7994286999294108102}
   m_Layer: 9
   m_Name: Player-3D-Mixamo
   m_TagString: Untagged
@@ -334,7 +334,7 @@ MonoBehaviour:
     type: 3}
   incrementValue: 25
   maxPower: 100
---- !u!114 &967639064743247653
+--- !u!114 &-7994286999294108102
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,12 +343,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 967639064743247634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21312022144b56142ad4dcee3df53e35, type: 3}
+  m_Script: {fileID: 11500000, guid: 688093412ae4ead4e8d43aa0ee86d49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeTimer: 3
-  callAttackTimer: 0.25
-  kickForce: 600
+  barrier: {fileID: 895720527826047429, guid: ee51c52085d4bb44498f08042dbf0e42, type: 3}
+  powerTimer: 2
+  spawType: 0
+  spawDynamicPosition: 2
+  spawFixedPosition: {x: -5, y: 0.85, z: -2}
 --- !u!1 &967639065112500844
 GameObject:
   m_ObjectHideFlags: 0

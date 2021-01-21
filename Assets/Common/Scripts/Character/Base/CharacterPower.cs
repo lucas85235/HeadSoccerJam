@@ -9,6 +9,7 @@ namespace MadeInHouse.Powers
     {
         protected BallBehaviour ball;
         protected Character character;
+        protected Character otherCharacter;
 
         protected virtual void Start()
         {
@@ -19,6 +20,7 @@ namespace MadeInHouse.Powers
         {
             ball = FindObjectOfType<BallBehaviour>();
             character = GetComponent<Character>();
+            otherCharacter = GameObject.FindGameObjectWithTag("Player2").GetComponent<Character>();
         }
 
         public virtual void UsePower()
