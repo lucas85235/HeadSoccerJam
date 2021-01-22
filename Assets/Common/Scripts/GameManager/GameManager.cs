@@ -10,6 +10,7 @@ namespace MadeInHouse
 {
     public class GameManager : MonoBehaviour
     {
+        protected LoadSelectCharacter load;
         public bool canScoring { get; private set; }
 
         [Header("Instantiete")]
@@ -41,10 +42,19 @@ namespace MadeInHouse
         protected virtual void Awake()
         {
             Instance = this;
+            Time.timeScale = 1f;
+
+            load = GetComponent<LoadSelectCharacter>();
+            load.Load();            
         }
 
         protected virtual void Start()
         {
+            if (playerOne == null)
+            {
+                playerOne = load.SelectedAllModels().transform;
+            }
+
             playerOne = Instantiate(playerOne, new Vector3(6, -0.2f, -2), playerOne.rotation);
             playerTwo = Instantiate(playerTwo, new Vector3(-6, -0.2f, -2), playerTwo.rotation);
             ball = Instantiate(ball, new Vector3(0, 3.75f, -2), Quaternion.identity);
