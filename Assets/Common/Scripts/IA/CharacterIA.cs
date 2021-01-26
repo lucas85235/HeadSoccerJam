@@ -11,6 +11,7 @@ namespace MadeInHouse.Characters
         /// </summary>
 
         protected Animator anim;
+        protected Rigidbody rb;
         protected BallBehaviour ball;
         protected DetectGround detectGround;
         protected CharacterSkill characterSkill;
@@ -18,6 +19,7 @@ namespace MadeInHouse.Characters
         protected CharacterSkillKick skillKick;
         protected CharacterSkillJump skillJump;
 
+        protected bool canJump = true;
         protected bool canAttack = true;
         public Vector3 lastPosition;
 
@@ -27,6 +29,7 @@ namespace MadeInHouse.Characters
         [Header("Private AI Parameters")]
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float minJumpDistance;
+        [SerializeField] protected float jumpSpeed;
         [SerializeField] protected float jumpDelay;
         [SerializeField] protected float maxProtectedDistance;
         [SerializeField] protected float attackCoolDown = 0.2f;
@@ -40,7 +43,9 @@ namespace MadeInHouse.Characters
         {
             anim = GetComponent<Character>().model.GetComponent<Animator>();
             ball = FindObjectOfType<BallBehaviour>();
-            detectGround = FindObjectOfType<DetectGround>();
+            
+            rb = GetComponent<Rigidbody>();
+            detectGround = GetComponent<DetectGround>();
 
             characterSkill = GetComponent<CharacterSkill>();
             skillHeadButt = GetComponent<CharacterSkillHeadButt>();
@@ -55,7 +60,7 @@ namespace MadeInHouse.Characters
 
         protected void SetJumpSettings(float force, float distance, float delay)
         {
-            skillJump.jumpForce = force;
+            jumpSpeed = force;
             minJumpDistance = distance;
             jumpDelay = delay;
         }
@@ -133,18 +138,14 @@ namespace MadeInHouse.Characters
         /// <summary> Main cpu play routines </summary>
         protected virtual void CpuMoveToBall()
         {
-            if (!characterSkill.canUseSkills)
-            {
-                return;
-            }
+            if (!characterSkill.canUseSkills) return;
 
             if (ball.transform.position.x > cpuFieldLimits.x && ball.transform.position.x < cpuFieldLimits.y)
             {
                 //move the cpu towards the ball
-
                 var smoothStep = Mathf.SmoothStep(
                     transform.position.x,
-                    ball.transform.position.x,
+                    ball.transform.position.x + 0.5f,
                     Time.fixedDeltaTime * moveSpeed);
 
                 transform.position = new Vector3(
@@ -152,6 +153,17 @@ namespace MadeInHouse.Characters
                     transform.position.y,
                     transform.position.z);
 
+                //if cpu is close enough to the ball, make it jump
+                var ballDistance = Vector3.Distance(transform.position, ball.transform.position);
+
+                if(ball.transform.position.y > 1f && ballDistance < minJumpDistance && detectGround.IsGrounded() && canJump) 
+                {
+                    canJump = false;
+                    anim.SetTrigger("Jump");
+                    StartCoroutine(JumpActivation());
+                }
+
+                // set move animation
                 if (transform.position.x < lastPosition.x)
                 {
                     anim.SetFloat("Speed", smoothStep);
@@ -160,6 +172,7 @@ namespace MadeInHouse.Characters
 
                 lastPosition = transform.position;
             }
+            else anim.SetFloat("Speed", 0);
 
             if (ball.transform.position.x < cpuFieldLimits.x)
             {
@@ -175,6 +188,19 @@ namespace MadeInHouse.Characters
             }
         }
 
+        /// <summary> enable jump ability again  </summary>
+        private IEnumerator JumpActivation() 
+        {
+            yield return new WaitForSeconds(jumpDelay);
+            Vector3 jumpPower = new Vector3(0, jumpSpeed - Random.Range(0, 20), 0);
+            rb.AddForce(jumpPower, ForceMode.Impulse);
+            anim.SetTrigger("JumpExit");
+
+            yield return new WaitForSeconds(0.5f);
+            yield return new WaitUntil( () => detectGround.IsGrounded() );
+            canJump = true;
+        }
+
         /// <summary> Shoot the ball upon collision </summary>
         protected virtual void OnCollisionEnter(Collision other)
         {
@@ -182,7 +208,7 @@ namespace MadeInHouse.Characters
 
             if (other.gameObject.tag == "Ball")
             {
-                anim.SetTrigger("Kick");
+                if (detectGround.IsGrounded()) anim.SetTrigger("Kick");
             }
         }
 
