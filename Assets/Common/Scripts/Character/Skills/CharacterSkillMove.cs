@@ -21,6 +21,13 @@ namespace MadeInHouse.Characters
         public override void InputHandle()
         {
             base.InputHandle();
+
+            if (!canUseSkills)
+            {
+                anim.SetFloat("Speed", 0);
+                return;
+            }
+
             moveInput = new Vector3(InputSystem.Instance.AxisX(), 0);
             
             var speed = moveInput.x < 1 ? moveInput.x * animSmooth : moveInput.x;
@@ -30,9 +37,6 @@ namespace MadeInHouse.Characters
         public override void UseSkill()
         {
             base.UseSkill();
-
-            if (!canUseSkills) return;
-
             transform.position += moveInput * moveSpeed * Time.deltaTime;
         }
     }

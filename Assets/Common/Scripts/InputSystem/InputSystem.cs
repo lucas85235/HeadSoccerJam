@@ -13,6 +13,7 @@ namespace MadeInHouse
         public KeyCode kickInput = KeyCode.X;
         public KeyCode powerInput = KeyCode.E;
         public KeyCode interactInput = KeyCode.F;
+        public KeyCode escapeInput = KeyCode.Escape;
 
         public static InputSystem Instance;
 
@@ -27,6 +28,7 @@ namespace MadeInHouse
         public virtual bool Kick() { return Input.GetKeyDown(kickInput); }
         public virtual bool Power() { return Input.GetKeyDown(powerInput); }
         public virtual bool Interact() { return Input.GetKeyDown(interactInput); }
+        public virtual bool Escape() { return Input.GetKeyDown(escapeInput); }
     }
 }
 

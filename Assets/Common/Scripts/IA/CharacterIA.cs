@@ -35,7 +35,7 @@ namespace MadeInHouse.Characters
         [SerializeField] protected float attackCoolDown = 0.2f;
 
         [Header("Move Rules")]
-        public Vector2 cpuFieldLimits = new Vector2(-1f, 8f);
+        public Vector2 cpuFieldLimits = new Vector2(-2f, 9f);
 
         public bool canMove { get; set; }
 

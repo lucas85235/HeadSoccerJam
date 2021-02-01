@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using MadeInHouse.Characters;
 
 using Random = UnityEngine.Random;
 
@@ -19,6 +20,7 @@ namespace MadeInHouse
         public BallBehaviour ball;
 
         [Header("Match")]
+        public float timeToStart = 3f;
         public float matchTime = 60f;
         public float restartMatchTimer = 1f;
         public float endMatchTimer = 1.25f;
@@ -44,7 +46,7 @@ namespace MadeInHouse
             Instance = this;
             Time.timeScale = 1f;
 
-            load = GetComponent<LoadSelectCharacter>();
+            load = new LoadSelectCharacter();
             load.Load();            
         }
 
@@ -55,34 +57,38 @@ namespace MadeInHouse
                 playerOne = load.SelectedAllModels().transform;
             }
 
-            playerOne = Instantiate(playerOne, new Vector3(6, -0.2f, -2), playerOne.rotation);
-            playerTwo = Instantiate(playerTwo, new Vector3(-6, -0.2f, -2), playerTwo.rotation);
-            ball = Instantiate(ball, new Vector3(0, 3.75f, -2), Quaternion.identity);
-            ResetPositions();
+            playerOne = Instantiate(playerOne, new Vector3(-7, -0.5f, -2), playerOne.rotation);
+            playerTwo = Instantiate(playerTwo, new Vector3(7, -0.5f, -2), playerTwo.rotation);
+            ball = Instantiate(ball, new Vector3(0, -0.5f, -2), Quaternion.identity);
+
+            playerOne.GetComponent<Character>().SetCanUseSkills(false);
+            playerTwo.GetComponent<Character>().SetCanUseSkills(false);
 
             Initialize();
-        }
-
-        protected virtual void Update()
-        {
-            if (gameOver && InputSystem.Instance.Interact())
-            {
-                OnContinue();
-            }
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                LevelLoader.Instance.LoadLevel("MainMenu");
-            }
         }
 
         public virtual void Initialize()
         {
             gameOver = false;
-            OnMatchStart();
+            Invoke("OnMatchStart", timeToStart);
         }
 
-        public virtual void OnMatchStart()
+        protected virtual void Update()
         {
+            if (InputSystem.Instance.Escape())
+            {
+                LevelLoader.Instance.LoadLevel("MainMenu");
+            }
+        }
+
+        #region Match Events
+        protected virtual void OnMatchStart()
+        {
+            Debug.Log("Start");
+
+            playerOne.GetComponent<Character>().SetCanUseSkills(true);
+            playerTwo.GetComponent<Character>().SetCanUseSkills(true);
+
             gameOver = false;
             canScoring = true;
 
@@ -97,32 +103,7 @@ namespace MadeInHouse
             StartCoroutine(MatchTimerRoutine());
         }
         
-        protected virtual IEnumerator MatchTimerRoutine()
-        {
-            float timer = matchTime;
-            while (timer > 0)
-            {
-                hud.timerText.text = timer.ToString();
-                yield return new WaitForSeconds(1);
-                timer -= 1;
-            }
-
-            SoundManager.Instance.PlayClipAtPoint(matchSounds.endWhistle);
-            
-            hud.timerText.text = timer.ToString();
-            hud.endMatchText.text = "Fim da Partida";
-            hud.endMatchText.gameObject.SetActive(true);
-
-            if (!canScoring) yield return new WaitUntil( () => canScoring);
-
-            // Controls Variables
-            canScoring = false;
-            gameOver = false;
-
-            Invoke("OnMatchEnd", endMatchTimer);
-        }
-
-        public virtual void OnAfterScoring()
+        protected virtual void OnAfterScoring()
         {
             ResetPositions();
             StopBallMovemnt();
@@ -133,27 +114,30 @@ namespace MadeInHouse
 
         protected virtual void OnMatchEnd()
         {
+            int coinEarm = 0;
             gameOver = true;
 
             // Empate
             if (matchScore.x == matchScore.y)
             {
                 hud.endMatchText.text = "<color=#E15253>EMPATE</color>";
+                coinEarm = Random.Range(10, 29);
             }
             // left player won
             else if (matchScore.x < matchScore.y)
             {
                 hud.endMatchText.text = "<color=#E15253>DERROTA</color>";
+                coinEarm = Random.Range(1, 9);
             }
             // right player won
             else if (matchScore.x > matchScore.y)
             {
                 hud.endMatchText.text = "VITÓRIA";
+                coinEarm = Random.Range(30, 50);
             }
 
-            int value = Random.Range(10, 50);
-            LegendCoin.Instance.EarnLegendCoin(value);
-            hud.coinEarnedText.text = "+" + value;
+            LegendCoin.Instance.EarnLegendCoin(coinEarm);
+            hud.coinEarnedText.text = "+" + coinEarm;
             hud.coinEarnedText.gameObject.SetActive(true);
 
             if (autoContinueAfterEnd)
@@ -162,15 +146,26 @@ namespace MadeInHouse
             }
         }
 
-        protected virtual void OnContinue()
+        public virtual void OnContinue()
         {
-            OnMatchStart();
-        }
+            hud.endMatchText.gameObject.SetActive(false);
+            hud.coinEarnedText.gameObject.SetActive(false);
 
-        public virtual void ResetPositions()
+            playerOne.position = new Vector3(-7, -0.5f, -2);
+            playerTwo.position = new Vector3(7, -0.5f, -2);
+            ball.transform.position = new Vector3(0, -0.5f, -2);
+
+            playerOne.GetComponent<Character>().SetCanUseSkills(false);
+            playerTwo.GetComponent<Character>().SetCanUseSkills(false);
+
+            Invoke("OnMatchStart", timeToStart);
+        }
+        #endregion
+
+        protected virtual void ResetPositions()
         {
-            playerOne.position = new Vector3(-6, -0.2f, -2);
-            playerTwo.position = new Vector3(6, -0.2f, -2);
+            playerOne.position = new Vector3(-7, -0.5f, -2);
+            playerTwo.position = new Vector3(7, -0.5f, -2);
             ball.transform.position = new Vector3(0, 3.75f, -2);
         }
 
@@ -208,14 +203,46 @@ namespace MadeInHouse
             hud.rightScoreText.text = matchScore.y.ToString();            
         }
 
-        public virtual IEnumerator WhenScoring()
+        protected virtual IEnumerator WhenScoring()
         {
             Time.timeScale = 0.5f;
-            goalAnimtion.SetTrigger("Goal");
+
+            if (goalAnimtion != null)
+                goalAnimtion.SetTrigger("Goal");
+
             yield return new WaitForSeconds(0.4f);
             Time.timeScale = 1f;
+
             OnAfterScoring();
         }
+
+        /// <summary> This caroutine handle with match count time and match end </summary>
+        protected virtual IEnumerator MatchTimerRoutine()
+        {
+            // Time handle
+            float timer = matchTime;
+            while (timer > 0)
+            {
+                hud.timerText.text = timer.ToString();
+                yield return new WaitForSeconds(1);
+                timer -= 1;
+            }
+
+            // End handle
+            SoundManager.Instance.PlayClipAtPoint(matchSounds.endWhistle);
+            
+            hud.timerText.text = timer.ToString();
+            hud.endMatchText.text = "Fim da Partida";
+            hud.endMatchText.gameObject.SetActive(true);
+
+            if (!canScoring) yield return new WaitUntil( () => canScoring);
+
+            // Controls Variables
+            canScoring = false;
+            gameOver = false;
+
+            Invoke("OnMatchEnd", endMatchTimer);
+        }        
     }
 
     [System.Serializable]

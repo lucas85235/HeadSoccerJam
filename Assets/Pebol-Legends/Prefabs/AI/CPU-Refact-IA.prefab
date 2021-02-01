@@ -213,14 +213,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastPosition: {x: 0, y: 0, z: 0}
-  cpuLevel: 2
+  cpuLevel: 1
   moveSpeed: 0
   minJumpDistance: 0
   jumpSpeed: 0
   jumpDelay: 0
   maxProtectedDistance: 0
   attackCoolDown: 0.6
-  cpuFieldLimits: {x: -1, y: 8}
+  cpuFieldLimits: {x: -2, y: 9}
 --- !u!114 &967639064743247641
 MonoBehaviour:
   m_ObjectHideFlags: 0
