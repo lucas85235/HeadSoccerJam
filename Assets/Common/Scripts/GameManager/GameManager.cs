@@ -47,7 +47,9 @@ namespace MadeInHouse
             Time.timeScale = 1f;
 
             load = new LoadSelectCharacter();
-            load.Load();            
+            load.Load();
+
+            ball = Instantiate(ball, new Vector3(0, -0.5f, -2), Quaternion.identity);
         }
 
         protected virtual void Start()
@@ -58,11 +60,15 @@ namespace MadeInHouse
             }
 
             playerOne = Instantiate(playerOne, new Vector3(-7, -0.5f, -2), playerOne.rotation);
-            playerTwo = Instantiate(playerTwo, new Vector3(7, -0.5f, -2), playerTwo.rotation);
-            ball = Instantiate(ball, new Vector3(0, -0.5f, -2), Quaternion.identity);
-
             playerOne.GetComponent<Character>().SetCanUseSkills(false);
-            playerTwo.GetComponent<Character>().SetCanUseSkills(false);
+
+            if (playerTwo != null && !playerTwo.gameObject.scene.IsValid())
+            {
+                playerTwo = Instantiate(playerTwo, new Vector3(7, -0.5f, -2), playerTwo.rotation);
+                var playerTwoIA = playerTwo.GetComponent<CharacterIA>();
+                playerTwoIA.SetCpuLevel(playerTwoIA.cpuLevel);
+                playerTwo.GetComponent<Character>().SetCanUseSkills(false);
+            }
 
             Initialize();
         }

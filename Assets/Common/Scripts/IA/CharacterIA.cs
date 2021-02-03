@@ -39,10 +39,9 @@ namespace MadeInHouse.Characters
 
         public bool canMove { get; set; }
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             anim = GetComponent<Character>().model.GetComponent<Animator>();
-            ball = FindObjectOfType<BallBehaviour>();
             
             rb = GetComponent<Rigidbody>();
             detectGround = GetComponent<DetectGround>();
@@ -54,8 +53,11 @@ namespace MadeInHouse.Characters
 
             canMove = true;
             lastPosition = transform.position;
+        }
 
-            SetCpuLevel();
+        void Start()
+        {
+            ball = FindObjectOfType<BallBehaviour>();
         }
 
         protected void SetJumpSettings(float force, float distance, float delay)
@@ -66,9 +68,11 @@ namespace MadeInHouse.Characters
         }
 
         // Change the AI configuration based on the enum selection
-        protected virtual void SetCpuLevel()
+        public virtual void SetCpuLevel(DifficultyLevels level)
         {
-            switch (cpuLevel)
+            cpuLevel = level;
+            
+            switch (level)
             {
                 case DifficultyLevels.easy:
                     moveSpeed = 6.0f;
