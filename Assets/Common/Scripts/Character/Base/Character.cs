@@ -11,16 +11,24 @@ namespace MadeInHouse.Characters
         protected float stunnedTime = 3f;
         protected bool isStunned = false;
 
+        protected bool isIA = false;
+
         [Header("Setup")]
         public Transform model;
 
-        void Start()
+        protected virtual void Awake()
         {
             skills = GetComponents<CharacterSkill>();
+
+            if (GetComponent<CharacterIA>() != null)
+            {
+                isIA = true;
+            }
         }
 
-        void Update()
+        protected virtual void Update()
         {
+            if (isIA) return;
             SkillsHandle();
         }
 

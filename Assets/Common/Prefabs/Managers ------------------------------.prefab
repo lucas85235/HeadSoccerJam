@@ -176,11 +176,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1a0dc7cfded59459af63faebc061ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerOne: {fileID: 4679113392219086584, guid: 67d978a2a8ed8874387e4e22947d3eee,
-    type: 3}
-  playerTwo: {fileID: 7786293936871005871, guid: 53cdaa1e7b1eefb42b936d939a4290d3,
+  playerOne: {fileID: 0}
+  playerTwo: {fileID: 967639064743247647, guid: 81489935c855bcb438435e92941ac6d0,
     type: 3}
   ball: {fileID: 308727819795058832, guid: d0b447bee3d21794aadfeb1e6e9636ee, type: 3}
+  timeToStart: 3
   matchTime: 60
   restartMatchTimer: 1
   endMatchTimer: 1.25
@@ -247,6 +247,7 @@ MonoBehaviour:
   kickInput: 120
   powerInput: 101
   interactInput: 102
+  escapeInput: 27
 --- !u!1 &2993158169297172475
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ namespace MadeInHouse.Characters
         protected CharacterIA characterIA;
         protected CharacterSkillPower skillPower;
         
+        // if you want disable all skills use SetCanUseSkills in Character script
         [HideInInspector] public bool canUseSkills = true;
 
         [Header("Feedbakcs")]
@@ -30,7 +31,6 @@ namespace MadeInHouse.Characters
             skillPower = GetComponent<CharacterSkillPower>();
             characterIA = GetComponent<CharacterIA>();
             anim = character.model.GetComponent<Animator>();
-
         }
 
         #region Input Handle

@@ -17,7 +17,11 @@ namespace MadeInHouse
 
         public virtual void PlayClipAtPoint(AudioClip clip)
         {
-            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position, volume);
+            if (clip != null)
+            {
+                AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position, volume);
+            }
+            else Debug.LogError("Clip is Null");
         }
     }
 }

@@ -162,7 +162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967639064743247634}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5, y: -0.85, z: -2}
+  m_LocalPosition: {x: 7, y: -0.5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 785605350128293496}
@@ -213,14 +213,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastPosition: {x: 0, y: 0, z: 0}
-  cpuLevel: 2
-  moveSpeed: 0
+  cpuLevel: 1
+  moveSpeed: 6
   minJumpDistance: 0
   jumpSpeed: 0
   jumpDelay: 0
-  maxProtectedDistance: 0
+  maxProtectedDistance: 2.8
   attackCoolDown: 0.6
-  cpuFieldLimits: {x: -1, y: 8}
+  cpuFieldLimits: {x: -2, y: 9}
 --- !u!114 &967639064743247641
 MonoBehaviour:
   m_ObjectHideFlags: 0
