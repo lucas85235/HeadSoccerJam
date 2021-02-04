@@ -54,6 +54,13 @@ namespace MadeInHouse
 
         protected virtual void Start()
         {
+            Initialize();
+        }
+
+        public virtual void Initialize()
+        {
+            gameOver = false;
+
             if (playerOne == null)
             {
                 playerOne = load.SelectedAllModels().transform;
@@ -70,12 +77,6 @@ namespace MadeInHouse
                 playerTwo.GetComponent<Character>().SetCanUseSkills(false);
             }
 
-            Initialize();
-        }
-
-        public virtual void Initialize()
-        {
-            gameOver = false;
             Invoke("OnMatchStart", timeToStart);
         }
 
@@ -120,14 +121,42 @@ namespace MadeInHouse
 
         protected virtual void OnMatchEnd()
         {
-            int coinEarm = 0;
             gameOver = true;
+            WhoWon();
+
+            if (autoContinueAfterEnd)
+            {
+                Invoke("OnContinue", continueTimer);
+            }
+        }
+
+        public virtual void OnContinue()
+        {
+            gameOver = false;
+
+            hud.endMatchText.gameObject.SetActive(false);
+            hud.coinEarnedText.gameObject.SetActive(false);
+
+            playerOne.position = new Vector3(-7, -0.5f, -2);
+            playerTwo.position = new Vector3(7, -0.5f, -2);
+            ball.transform.position = new Vector3(0, -0.5f, -2);
+
+            playerOne.GetComponent<Character>().SetCanUseSkills(false);
+            playerTwo.GetComponent<Character>().SetCanUseSkills(false);
+
+            Invoke("OnMatchStart", timeToStart);
+        }
+        #endregion
+
+        protected virtual void WhoWon()
+        {
+            int coinEarm = 0;
 
             // Empate
             if (matchScore.x == matchScore.y)
             {
                 hud.endMatchText.text = "<color=#E15253>EMPATE</color>";
-                coinEarm = Random.Range(10, 29);
+                coinEarm = Random.Range(10, 19);
             }
             // left player won
             else if (matchScore.x < matchScore.y)
@@ -144,29 +173,8 @@ namespace MadeInHouse
 
             LegendCoin.Instance.EarnLegendCoin(coinEarm);
             hud.coinEarnedText.text = "+" + coinEarm;
-            hud.coinEarnedText.gameObject.SetActive(true);
-
-            if (autoContinueAfterEnd)
-            {
-                Invoke("OnContinue", continueTimer);
-            }
+            hud.coinEarnedText.gameObject.SetActive(true);            
         }
-
-        public virtual void OnContinue()
-        {
-            hud.endMatchText.gameObject.SetActive(false);
-            hud.coinEarnedText.gameObject.SetActive(false);
-
-            playerOne.position = new Vector3(-7, -0.5f, -2);
-            playerTwo.position = new Vector3(7, -0.5f, -2);
-            ball.transform.position = new Vector3(0, -0.5f, -2);
-
-            playerOne.GetComponent<Character>().SetCanUseSkills(false);
-            playerTwo.GetComponent<Character>().SetCanUseSkills(false);
-
-            Invoke("OnMatchStart", timeToStart);
-        }
-        #endregion
 
         protected virtual void ResetPositions()
         {

@@ -6,51 +6,62 @@ using MadeInHouse.Characters;
 
 namespace MadeInHouse
 {
-    public class GameTournament : MonoBehaviour
+    public class GameTournament : GameManager
     {
-        protected GameManager game;
-        
-        [Header("Tournament Settings")]
+        [Header("Tournament")]
         public Text levelText;
+        public CupHud cupHud;
         public LevelSetup[] levels;
 
         [Header("Debug")]
         public int currentLevel = 0;
 
-        void Start()
+        protected override void Start()
         {
-            game = FindObjectOfType<GameManager>();
             NextLevelSetup();
+
+            base.Start();
         }
 
-        void Update()
+        protected override void Update()
         {
-            if (game.GameOver && currentLevel == levels.Length)
+            base.Update();
+
+            if (GameOver && currentLevel == levels.Length && !cupHud.win.activeSelf)
             {
+                cupHud.win.SetActive(true);
                 Debug.Log("End Tournement");
                 return;
             }
-            
-            if (game.GameOver && InputSystem.Instance.Interact())
+
+            if (GameOver && InputSystem.Instance.Interact())
             {
-                NextLevelSetup();
-                game.OnContinue();
+                NextLevelAction();
             }
+        }
+
+        // in case of necessary set in button event
+        public virtual void NextLevelAction()
+        {
+            NextLevelSetup();
+            OnContinue();
         }
 
         protected virtual void NextLevelSetup()
         {
-            var playerTwo = GameObject.FindWithTag("Player2");
-            if (playerTwo != null)
+            cupHud.next.SetActive(false);
+
+            var findPlayerTwo = GameObject.FindWithTag("Player2");
+            if (findPlayerTwo != null)
             {
-                Destroy(playerTwo);
+                Destroy(findPlayerTwo);
             }
 
-            game.playerTwo = levels[currentLevel].adversary.transform;
-            game.playerTwo = Instantiate(game.playerTwo, new Vector3(7, -0.5f, -2), game.playerTwo.rotation);
+            playerTwo = levels[currentLevel].adversary.transform;
+            playerTwo = Instantiate(playerTwo, new Vector3(7, -0.5f, -2), playerTwo.rotation);
 
-            game.playerTwo.GetComponent<CharacterIA>().SetCpuLevel(levels[currentLevel].difficulty);
-            game.playerTwo.GetComponent<Character>().SetCanUseSkills(false);
+            playerTwo.GetComponent<CharacterIA>().SetCpuLevel(levels[currentLevel].difficulty);
+            playerTwo.GetComponent<Character>().SetCanUseSkills(false);
 
             currentLevel++;
             levelText.text = currentLevel.ToString();
@@ -58,11 +69,46 @@ namespace MadeInHouse
             Debug.Log("Current Level " + currentLevel);
         }
 
+        protected override void WhoWon()
+        {
+            int coinEarm = 0;
+
+            // Empate
+            if (matchScore.x == matchScore.y)
+            {
+                cupHud.lose.SetActive(true);
+            }
+            // left player won
+            else if (matchScore.x < matchScore.y)
+            {
+                cupHud.lose.SetActive(true);
+            }
+            // right player won
+            else if (matchScore.x > matchScore.y)
+            {
+                cupHud.next.SetActive(true);
+                coinEarm = Random.Range(20, 50) * currentLevel;
+            }
+
+            LegendCoin.Instance.EarnLegendCoin(coinEarm);
+            hud.coinEarnedText.text = "+" + coinEarm;
+            hud.coinEarnedText.gameObject.SetActive(true);
+        }
+
         [System.Serializable]
         public struct LevelSetup
         {
             public CharacterIA.DifficultyLevels difficulty;
             public CharacterIA adversary;
+        }
+
+
+        [System.Serializable]
+        public struct CupHud
+        {
+            public GameObject lose;
+            public GameObject next;
+            public GameObject win;
         }
     }
 }
