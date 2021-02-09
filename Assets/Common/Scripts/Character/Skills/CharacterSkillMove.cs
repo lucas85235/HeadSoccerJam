@@ -24,7 +24,10 @@ namespace MadeInHouse.Characters
 
             if (!canUseSkills)
             {
-                anim.SetFloat("Speed", 0);
+                if (anim != null)
+                {
+                    anim.SetFloat("Speed", 0);
+                }
                 return;
             }
 

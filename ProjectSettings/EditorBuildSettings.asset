@@ -9,9 +9,15 @@ EditorBuildSettings:
     path: Assets/Pebol-Legends/Scenes/MainMenu.unity
     guid: 45383735ab9fe0b408ff48cba9447147
   - enabled: 1
-    path: Assets/Pebol-Legends/Scenes/GameTest.unity
+    path: Assets/Pebol-Legends/Scenes/Cups/GameTest.unity
     guid: 165b9efeeca6a3646a86717a32fae5e7
   - enabled: 1
-    path: Assets/Pebol-Legends/Scenes/GameTournament.unity
+    path: Assets/Pebol-Legends/Scenes/Cups/GameTournament.unity
     guid: 65280a3a16cb4154f91ae97f637a68f6
+  - enabled: 1
+    path: Assets/Pebol-Legends/Scenes/Story/Boto/BotoDialogue.unity
+    guid: 4323c656ee413f541a698fbaed47e730
+  - enabled: 1
+    path: Assets/Pebol-Legends/Scenes/Story/Boto/Boto.unity
+    guid: 1bd250bee1a80964d9ac340253bfd88c
   m_configObjects: {}
