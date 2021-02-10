@@ -4733,6 +4733,11 @@ PrefabInstance:
       propertyPath: hud.coinEarnedText
       value: 
       objectReference: {fileID: 1750326834}
+    - target: {fileID: 1936108745, guid: 8ffd53b1c88b4cc42b73d17d2944f27c, type: 3}
+      propertyPath: playerOne
+      value: 
+      objectReference: {fileID: 967639064743247647, guid: 08547564ff0550445ae950f8a3f5c152,
+        type: 3}
     - target: {fileID: 2993158169297172357, guid: 8ffd53b1c88b4cc42b73d17d2944f27c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4792,6 +4797,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Managers ------------------------------
+      objectReference: {fileID: 0}
+    - target: {fileID: 2993158169297172475, guid: 8ffd53b1c88b4cc42b73d17d2944f27c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ffd53b1c88b4cc42b73d17d2944f27c, type: 3}
