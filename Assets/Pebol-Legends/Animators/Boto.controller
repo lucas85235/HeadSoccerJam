@@ -119,7 +119,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 6c3c985c429f7594c8a620643257f8fd,
+  m_Motion: {fileID: -203655887218126122, guid: be5ebdfb91a59f64ebcce4b00978a5df,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -147,7 +147,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 16497992966a9904caa4b649d10c5ca3,
+  m_Motion: {fileID: -203655887218126122, guid: cc7f2d0a22994c34daeb40b7bd14bdab,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -197,7 +197,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: b001195cb20b4f4489171929a46c903f,
+  m_Motion: {fileID: -203655887218126122, guid: 2ea2208d8a0b1d1408838ed535cbdf92,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -213,7 +213,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: cbd8c04c01f30bf4bb2724e5085aec1f,
+    m_Motion: {fileID: -203655887218126122, guid: ab28e3a311f7e3c40903ca476ad8b468,
       type: 3}
     m_Threshold: 0
     m_Position: {x: -1, y: 0}
@@ -222,7 +222,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: f107bd9321b0ed14e9f5fce05951ac8f,
+    m_Motion: {fileID: -203655887218126122, guid: 6e292375ff19680418b57b6889ff972d,
       type: 3}
     m_Threshold: 0.5
     m_Position: {x: 0, y: 0}
@@ -231,7 +231,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 22edda4b808a79a40a821c2b6969f9b7,
+    m_Motion: {fileID: -203655887218126122, guid: b6b93293d88f40345b2460cc136f5784,
       type: 3}
     m_Threshold: 1
     m_Position: {x: 1, y: 0}
@@ -252,7 +252,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Persona-Mixamo
+  m_Name: Boto
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Blend
@@ -356,7 +356,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: ca0e6ebd4b6076d44b667fa0edda7d20,
+  m_Motion: {fileID: -203655887218126122, guid: 67dfab689c9ef344a819f2ab793519bc,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
