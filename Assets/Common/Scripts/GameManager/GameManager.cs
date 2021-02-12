@@ -96,6 +96,9 @@ namespace MadeInHouse
             playerOne.GetComponent<Character>().SetCanUseSkills(true);
             playerTwo.GetComponent<Character>().SetCanUseSkills(true);
 
+            playerOne.GetComponent<CharacterSkillLife>().SetMaxLife();
+            playerTwo.GetComponent<CharacterSkillLife>().SetMaxLife();
+            
             gameOver = false;
             canScoring = true;
 
