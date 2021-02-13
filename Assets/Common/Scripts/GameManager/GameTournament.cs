@@ -29,8 +29,14 @@ namespace MadeInHouse
 
             if (GameOver && currentLevel == levels.Length && !cupHud.win.activeSelf)
             {
-                cupHud.win.SetActive(true);
                 Debug.Log("End Tournement");
+
+                if (matchScore.x > matchScore.y)
+                {
+                    cupHud.win.SetActive(true);
+                }
+                else cupHud.lose.SetActive(true);
+
                 return;
             }
 
