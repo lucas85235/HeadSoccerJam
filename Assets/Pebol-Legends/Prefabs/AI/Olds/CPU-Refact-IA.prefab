@@ -95,7 +95,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 1.2, z: 1}
+  m_Size: {x: 1.3, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &967639064738771732
 Rigidbody:
@@ -212,8 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567ae34b9f16bbc46b20c92fd9db15ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastPosition: {x: 0, y: 0, z: 0}
-  cpuLevel: 1
+  cpuLevel: 3
   moveSpeed: 6
   minJumpDistance: 0
   jumpSpeed: 0
@@ -221,6 +220,7 @@ MonoBehaviour:
   maxProtectedDistance: 2.8
   attackCoolDown: 0.6
   cpuFieldLimits: {x: -2, y: 9}
+  player: {fileID: 0}
 --- !u!114 &967639064743247641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +270,7 @@ MonoBehaviour:
   skillSound: {fileID: 8300000, guid: 251c638ff709cd747a665d54e0efb142, type: 3}
   kickForce: 190
   kickCoolDown: 0.3
+  automaticKick: 1
   ballCollision: {fileID: 967639065112500846}
   playerCollision: {fileID: 967639064738771733}
 --- !u!114 &5629429141272701174
@@ -381,7 +382,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 1.2, z: 1}
+  m_Size: {x: 1.3, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &967639065112500841
 Rigidbody:

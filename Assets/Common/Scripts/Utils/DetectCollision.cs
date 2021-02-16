@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace MadeInHouse
         protected Collider detectCollider;
         protected bool detectCoolDown = true;
 
+        public Action OnDetect;
         public Transform otherDetected { get; protected set; }
         public bool isDetected { get; protected set; }
 
@@ -35,6 +37,8 @@ namespace MadeInHouse
                     detectCollider.enabled = false;
                     detectCoolDown = false;
                     isDetected = true;
+
+                    if (OnDetect != null) OnDetect();
 
                     Invoke("DetectCoolDown", detectTimer);
                 }
