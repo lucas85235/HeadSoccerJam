@@ -74,11 +74,11 @@ namespace MadeInHouse.Characters
             }
         }
 
-        protected virtual void IncrementPower()
+        public virtual void IncrementPower(IncrementType i)
         {
             if (skillPower != null)
             {
-                skillPower.Increment();
+                skillPower.Increment(i);
             }
         }
     }

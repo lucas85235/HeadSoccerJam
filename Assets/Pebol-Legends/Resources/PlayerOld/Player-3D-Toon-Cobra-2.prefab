@@ -324,6 +324,7 @@ MonoBehaviour:
   skillSound: {fileID: 8300000, guid: 251c638ff709cd747a665d54e0efb142, type: 3}
   kickForce: 190
   kickCoolDown: 0.3
+  automaticKick: 0
   ballCollision: {fileID: 5928698701872708713}
   playerCollision: {fileID: 5928698702102844690}
 --- !u!114 &1239890051738488561
@@ -390,8 +391,11 @@ MonoBehaviour:
   skillSound: {fileID: 0}
   powerSlider: {fileID: 6934545350848447285, guid: 76f600bc9d7c9154ba8f5a3867155f07,
     type: 3}
-  incrementValue: 25
   maxPower: 100
+  bySecond: 3
+  whenScoring: 10
+  whenTakingGoal: 20
+  whenInteract: 4
 --- !u!114 &5284374983526389126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,6 +422,10 @@ PrefabInstance:
       value: model
       objectReference: {fileID: 0}
     - target: {fileID: 499360, guid: d80d4b6f7248c7249b08fd77553a3206, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499360, guid: d80d4b6f7248c7249b08fd77553a3206, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -430,6 +438,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 499360, guid: d80d4b6f7248c7249b08fd77553a3206, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 499360, guid: d80d4b6f7248c7249b08fd77553a3206, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -439,14 +451,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 499360, guid: d80d4b6f7248c7249b08fd77553a3206, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 499360, guid: d80d4b6f7248c7249b08fd77553a3206, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 499360, guid: d80d4b6f7248c7249b08fd77553a3206, type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 499360, guid: d80d4b6f7248c7249b08fd77553a3206, type: 3}

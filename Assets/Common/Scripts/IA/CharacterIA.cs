@@ -21,7 +21,7 @@ namespace MadeInHouse.Characters
 
         protected bool canJump = true;
         protected bool canAttack = true;
-        public Vector3 lastPosition;
+        protected Vector3 lastPosition;
 
         [Header("AI Difficulty Levels")]
         public DifficultyLevels cpuLevel = DifficultyLevels.easy;
@@ -36,13 +36,14 @@ namespace MadeInHouse.Characters
 
         [Header("Move Rules")]
         public Vector2 cpuFieldLimits = new Vector2(-2f, 9f);
+        public CharacterSkill player;
 
         public bool canMove { get; set; }
 
         protected virtual void Awake()
         {
             anim = GetComponent<Character>().model.GetComponent<Animator>();
-            
+
             rb = GetComponent<Rigidbody>();
             detectGround = GetComponent<DetectGround>();
 
@@ -50,6 +51,8 @@ namespace MadeInHouse.Characters
             skillHeadButt = GetComponent<CharacterSkillHeadButt>();
             skillKick = GetComponent<CharacterSkillKick>();
             skillJump = GetComponent<CharacterSkillJump>();
+
+            player = GameObject.FindGameObjectWithTag("Player1").GetComponent<CharacterSkill>();
 
             canMove = true;
             lastPosition = transform.position;
@@ -71,37 +74,41 @@ namespace MadeInHouse.Characters
         public virtual void SetCpuLevel(DifficultyLevels level)
         {
             cpuLevel = level;
-            
+
             switch (level)
             {
                 case DifficultyLevels.easy:
-                    moveSpeed = 6.0f;
-                    maxProtectedDistance = 2.8f;
-                    skillHeadButt.buttForce = 180;
+                    moveSpeed = 7.0f;
+                    maxProtectedDistance = 3.0f;
+                    skillHeadButt.buttForce = 200;
+                    skillKick.kickForce = 160;
                     attackCoolDown = 0.6f;
                     SetJumpSettings(40f, 2.5f, 0.3f);
                     break;
 
                 case DifficultyLevels.normal:
                     moveSpeed = 8.0f;
-                    maxProtectedDistance = 3.4f;
+                    maxProtectedDistance = 3.8f;
                     skillHeadButt.buttForce = 220;
+                    skillKick.kickForce = 180;
                     attackCoolDown = 0.5f;
                     SetJumpSettings(50f, 3.5f, 0.2f);
                     break;
 
                 case DifficultyLevels.hard:
-                    moveSpeed = 10.0f;
-                    maxProtectedDistance = 4.4f;
-                    skillHeadButt.buttForce = 260;
+                    moveSpeed = 9.0f;
+                    maxProtectedDistance = 5f;
+                    skillHeadButt.buttForce = 250;
+                    skillKick.kickForce = 200;
                     attackCoolDown = 0.4f;
                     SetJumpSettings(60f, 3.5f, 0.1f);
                     break;
 
                 case DifficultyLevels.veryHard:
-                    moveSpeed = 13.0f;
-                    maxProtectedDistance = 5f;
-                    skillHeadButt.buttForce = 280;
+                    moveSpeed = 11.0f;
+                    maxProtectedDistance = 6f;
+                    skillHeadButt.buttForce = 270;
+                    skillKick.kickForce = 220;
                     attackCoolDown = 0.3f;
                     SetJumpSettings(60f, 3.5f, 0.05f);
                     break;
@@ -144,23 +151,32 @@ namespace MadeInHouse.Characters
         {
             if (!characterSkill.canUseSkills) return;
 
+            if (player != null)
+            {
+                float angel = Vector3.Angle(transform.forward, player.transform.position - transform.position);
+
+                // Player if back this IA
+                if (Mathf.Abs(angel) > 90 || !player.canUseSkills)
+                {
+                    Debug.Log("Atras");
+
+                    //move the cpu towards the ball
+                    var smoothStep = MoveToBall(-2);
+                    SetMoveAnimation(smoothStep, false);
+
+                    return;
+                }
+            }
+
             if (ball.transform.position.x > cpuFieldLimits.x && ball.transform.position.x < cpuFieldLimits.y)
             {
                 //move the cpu towards the ball
-                var smoothStep = Mathf.SmoothStep(
-                    transform.position.x,
-                    ball.transform.position.x + 0.5f,
-                    Time.fixedDeltaTime * moveSpeed);
-
-                transform.position = new Vector3(
-                    smoothStep,
-                    transform.position.y,
-                    transform.position.z);
+                var smoothStep = MoveToBall();
 
                 //if cpu is close enough to the ball, make it jump
                 var ballDistance = Vector3.Distance(transform.position, ball.transform.position);
 
-                if(ball.transform.position.y > 1f && ballDistance < minJumpDistance && detectGround.IsGrounded() && canJump) 
+                if (ball.transform.position.y > 1f && ballDistance < minJumpDistance && detectGround.IsGrounded() && canJump)
                 {
                     canJump = false;
                     anim.SetTrigger("Jump");
@@ -168,13 +184,7 @@ namespace MadeInHouse.Characters
                 }
 
                 // set move animation
-                if (transform.position.x < lastPosition.x)
-                {
-                    anim.SetFloat("Speed", smoothStep);
-                }
-                else anim.SetFloat("Speed", -smoothStep);
-
-                lastPosition = transform.position;
+                SetMoveAnimation(smoothStep);
             }
             else anim.SetFloat("Speed", 0);
 
@@ -192,8 +202,41 @@ namespace MadeInHouse.Characters
             }
         }
 
+        protected virtual float MoveToBall(float moveSmooth = 1)
+        {
+            var smoothStep = Mathf.SmoothStep(
+                transform.position.x,
+                ball.transform.position.x + 0.5f,
+                Time.fixedDeltaTime * moveSpeed);
+
+            transform.position = new Vector3(
+                smoothStep,
+                transform.position.y,
+                transform.position.z);
+
+            return smoothStep;
+        }
+
+        protected virtual void SetMoveAnimation(float speed, bool backwalk = true)
+        {
+            if (!backwalk)
+            {
+                if (speed < 0) speed = speed * -1;
+                anim.SetFloat("Speed", speed);
+                return;
+            }
+
+            if (transform.position.x < lastPosition.x)
+            {
+                anim.SetFloat("Speed", speed);
+            }
+            else anim.SetFloat("Speed", -speed);
+
+            lastPosition = transform.position;
+        }
+
         /// <summary> enable jump ability again  </summary>
-        private IEnumerator JumpActivation() 
+        private IEnumerator JumpActivation()
         {
             yield return new WaitForSeconds(jumpDelay);
             Vector3 jumpPower = new Vector3(0, jumpSpeed - Random.Range(0, 20), 0);
@@ -201,7 +244,7 @@ namespace MadeInHouse.Characters
             anim.SetTrigger("JumpExit");
 
             yield return new WaitForSeconds(0.5f);
-            yield return new WaitUntil( () => detectGround.IsGrounded() );
+            yield return new WaitUntil(() => detectGround.IsGrounded());
             canJump = true;
         }
 

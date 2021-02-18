@@ -28,6 +28,8 @@ namespace MadeInHouse.Characters
 
         protected virtual void Update()
         {
+            skills[0].IncrementPower(IncrementType.second);
+
             if (isIA) return;
             SkillsHandle();
         }
