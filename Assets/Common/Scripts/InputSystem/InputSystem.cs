@@ -1,19 +1,17 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using MadeInHouse.Characters;
 
 namespace MadeInHouse
 {
     public class InputSystem : MonoBehaviour
     {
-        [Header("Input Settings")]
-        public string axisX = "Horizontal";
-        public string axisY = "Vertical";
-        public KeyCode jumpInput = KeyCode.Z;
-        public KeyCode kickInput = KeyCode.X;
-        public KeyCode powerInput = KeyCode.E;
-        public KeyCode interactInput = KeyCode.F;
-        public KeyCode escapeInput = KeyCode.Escape;
+        private InputHandle inputHandle;
+
+        public int index = -1;
 
         public static InputSystem Instance;
 
@@ -22,13 +20,39 @@ namespace MadeInHouse
             if (Instance == null) Instance = this;
         }
 
-        public virtual float AxisX() { return Input.GetAxis("Horizontal"); }
-        public virtual float AxisY() { return Input.GetAxis("Vertical"); }
-        public virtual bool Jump() { return Input.GetKeyDown(jumpInput); }
-        public virtual bool Kick() { return Input.GetKeyDown(kickInput); }
-        public virtual bool Power() { return Input.GetKeyDown(powerInput); }
-        public virtual bool Interact() { return Input.GetKeyDown(interactInput); }
-        public virtual bool Escape() { return Input.GetKeyDown(escapeInput); }
+        private void Start() 
+        {
+            inputHandle = GetComponent<InputHandle>();
+            index = GetComponent<PlayerInput>().playerIndex;
+
+            foreach (var character in FindObjectsOfType<Character>())
+            {
+                if (character.playerIndex == index) character.SetInputSystem(this);
+            }
+        }
+
+        public virtual float AxisX() { return inputHandle.axisX; }
+        public virtual bool Jump() { return inputHandle.jump; }
+        public virtual bool Kick() { return inputHandle.kick; }
+        public virtual bool Power() { return inputHandle.power; }
+
+        public virtual bool Interact() 
+        { 
+            if (inputHandle == null)
+            {
+                return false;
+            }
+            return inputHandle.interact; 
+        }
+
+        public virtual bool Escape() 
+        { 
+            if (inputHandle == null)
+            {
+                return false;
+            }
+            return inputHandle.escape; 
+        }
     }
 }
 

@@ -12,10 +12,13 @@ namespace MadeInHouse.Characters
         [Range(4, 10)] public float moveSpeed = 7;
         [Range(2, 4)] public float animSmooth = 3;
 
-        protected override void Start()
+        protected override IEnumerator Start()
         {
             base.Start();
-            InputAxis = InputSystem.Instance.AxisX;
+            
+            yield return new WaitUntil( () => character.input != null );
+
+            InputAxis = character.input.AxisX;
         }
 
         public override void InputHandle()
@@ -31,10 +34,13 @@ namespace MadeInHouse.Characters
                 return;
             }
 
-            moveInput = new Vector3(InputSystem.Instance.AxisX(), 0);
-            
-            var speed = moveInput.x < 1 ? moveInput.x * animSmooth : moveInput.x;
-            anim.SetFloat("Speed", speed);
+            if (character.input != null)
+            {
+                moveInput = new Vector3(character.input.AxisX(), 0);
+                
+                var speed = moveInput.x < 1 ? moveInput.x * animSmooth : moveInput.x;
+                anim.SetFloat("Speed", speed);                
+            }
         }
 
         public override void UseSkill()

@@ -25,7 +25,7 @@ namespace MadeInHouse
         #if UNITY_EDITOR
         protected virtual void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (InputSystem.Instance != null && InputSystem.Instance.Interact())
             {
                 EarnLegendCoin(10);
             }

@@ -214,6 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1094831598575992664}
+  characterType: 0
+  playerIndex: 0
 --- !u!114 &967639064743247655
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,10 +19,13 @@ namespace MadeInHouse.Characters
         [Range(30, 60)] public float jumpForce = 40;
         public float jumpDelay = 0.1f;
 
-        protected override void Start()
+        protected override IEnumerator Start()
         {
             base.Start();
-            InputCode = InputSystem.Instance.Jump;
+
+            yield return new WaitUntil( () => character.input != null );
+
+            InputCode = character.input.Jump;
         }
 
         protected virtual void FixedUpdate()

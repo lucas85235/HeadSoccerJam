@@ -82,7 +82,7 @@ namespace MadeInHouse
 
         protected virtual void Update()
         {
-            if (InputSystem.Instance.Escape())
+            if (InputSystem.Instance != null && InputSystem.Instance.Escape())
             {
                 LevelLoader.Instance.LoadLevel("MainMenu");
             }

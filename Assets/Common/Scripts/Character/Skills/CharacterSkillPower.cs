@@ -21,10 +21,14 @@ namespace MadeInHouse.Characters
         public float whenTakingGoal = 10;
         public float whenInteract = 2;
 
-        protected override void Start()
+        protected override IEnumerator Start()
         {
             base.Start();
-            InputCode = InputSystem.Instance.Power;
+
+            yield return new WaitUntil( () => character.input != null );
+
+            InputCode = character.input.Power;
+
         }
 
         protected override void Initialize()

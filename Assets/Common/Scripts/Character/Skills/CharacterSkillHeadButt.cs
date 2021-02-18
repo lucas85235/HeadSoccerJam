@@ -23,7 +23,11 @@ namespace MadeInHouse.Characters
         public override void InputHandle()
         {
             base.InputHandle();
-            axisInput = InputSystem.Instance.AxisX();
+
+            if (character.input != null)
+            {
+                axisInput = character.input.AxisX();
+            }
         }
 
         protected virtual void OnCollisionEnter(Collision other)

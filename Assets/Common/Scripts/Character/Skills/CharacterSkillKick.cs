@@ -20,10 +20,13 @@ namespace MadeInHouse.Characters
         public DetectCollision ballCollision;
         public DetectCollision playerCollision;
 
-        protected override void Start()
+        protected override IEnumerator Start()
         {
             base.Start();
-            InputCode = InputSystem.Instance.Kick;
+
+            yield return new WaitUntil( () => character.input != null );
+
+            InputCode = character.input.Kick;
         }
 
         protected override void Initialize()
@@ -39,7 +42,11 @@ namespace MadeInHouse.Characters
         public override void InputHandle()
         {
             base.InputHandle();
-            axisInput = InputSystem.Instance.AxisX();
+
+            if (character.input != null)
+            {
+                axisInput = character.input.AxisX();
+            }
         }
 
         protected virtual void AutomaticKickBall()

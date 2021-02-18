@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace MadeInHouse.Characters
     public class Character : MonoBehaviour
     {
         protected CharacterSkill[] skills;
+        public InputSystem input { get; protected set; }
 
         protected float stunnedTime = 3f;
         protected bool isStunned = false;
@@ -15,6 +17,14 @@ namespace MadeInHouse.Characters
 
         [Header("Setup")]
         public Transform model;
+        public CharacterType characterType = CharacterType.Player;
+        public int playerIndex = 0;
+
+        public enum CharacterType
+        {
+            Player,
+            IA,
+        }
 
         protected virtual void Awake()
         {
@@ -24,6 +34,14 @@ namespace MadeInHouse.Characters
             {
                 isIA = true;
             }
+        }
+
+        public virtual void SetInputSystem(InputSystem inputSystem) 
+        {
+            if (characterType == CharacterType.Player)
+            {
+                input = inputSystem;
+            }    
         }
 
         protected virtual void Update()
