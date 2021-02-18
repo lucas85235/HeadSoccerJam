@@ -66,7 +66,7 @@ namespace MadeInHouse.Characters
                 }
 
                 ball.BallRebound(rebound, buttForce);
-                IncrementPower();
+                IncrementPower(IncrementType.interact);
             }
         }
     }

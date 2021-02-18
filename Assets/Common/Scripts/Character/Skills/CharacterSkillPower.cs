@@ -13,8 +13,13 @@ namespace MadeInHouse.Characters
 
         [Header("Setup")]
         public Slider powerSlider;
-        public int incrementValue = 15;
         public float maxPower = 100f;
+
+        [Header("Increment")]
+        public float bySecond = 0.1f;
+        public float whenScoring = 5;
+        public float whenTakingGoal = 10;
+        public float whenInteract = 2;
 
         protected override void Start()
         {
@@ -50,9 +55,31 @@ namespace MadeInHouse.Characters
             }
         }
 
-        public virtual void Increment()
+        public virtual void Increment(IncrementType i)
         {
-            powerSlider.value += incrementValue;
+            float iPower = 0;
+
+            if (IncrementType.second == i)
+                iPower = bySecond * Time.deltaTime;
+
+            else if (IncrementType.scoring == i)
+                iPower = whenScoring;
+
+            else if (IncrementType.taking == i)
+                iPower = whenTakingGoal;
+
+            else if (IncrementType.interact == i)
+                iPower = whenInteract;
+
+            powerSlider.value += iPower;
         }
+    }
+
+    public enum IncrementType
+    {
+        second,
+        scoring,
+        taking,
+        interact
     }
 }

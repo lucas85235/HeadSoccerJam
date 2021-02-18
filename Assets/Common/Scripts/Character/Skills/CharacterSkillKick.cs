@@ -113,7 +113,7 @@ namespace MadeInHouse.Characters
 
                     ball.rb.velocity = Vector2.zero;
                     ball.rb.AddForce(rebound * kickForce, ForceMode.Force);
-                    IncrementPower();
+                    IncrementPower(IncrementType.interact);
                 }
             }
         }

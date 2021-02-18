@@ -529,10 +529,12 @@ MonoBehaviour:
   cpuLevel: 2
   moveSpeed: 0
   minJumpDistance: 0
+  jumpSpeed: 0
   jumpDelay: 0
   maxProtectedDistance: 0
   attackCoolDown: 0.6
   cpuFieldLimits: {x: -1, y: 8}
+  player: {fileID: 0}
 --- !u!114 &-841031611453848064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,6 +564,7 @@ MonoBehaviour:
   skillSound: {fileID: 8300000, guid: 251c638ff709cd747a665d54e0efb142, type: 3}
   kickForce: 180
   kickCoolDown: 0.3
+  automaticKick: 0
   ballCollision: {fileID: 8993274458768899621}
   playerCollision: {fileID: 6625989439429919799}
 --- !u!114 &5290123761662334506
@@ -648,8 +651,11 @@ MonoBehaviour:
   skillSound: {fileID: 0}
   powerSlider: {fileID: 6934545350848447285, guid: b5f204c22cd2362488dce8fbdc130053,
     type: 3}
-  incrementValue: 15
   maxPower: 100
+  bySecond: 3
+  whenScoring: 10
+  whenTakingGoal: 20
+  whenInteract: 4
 --- !u!1 &9117150861908007748
 GameObject:
   m_ObjectHideFlags: 0

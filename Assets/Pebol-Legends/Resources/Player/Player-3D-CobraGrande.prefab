@@ -247,6 +247,7 @@ MonoBehaviour:
   skillSound: {fileID: 8300000, guid: 251c638ff709cd747a665d54e0efb142, type: 3}
   kickForce: 190
   kickCoolDown: 0.3
+  automaticKick: 0
   ballCollision: {fileID: 967639065112500846}
   playerCollision: {fileID: 967639064738771733}
 --- !u!114 &5629429141272701174
@@ -313,8 +314,11 @@ MonoBehaviour:
   skillSound: {fileID: 0}
   powerSlider: {fileID: 6934545350848447285, guid: 76f600bc9d7c9154ba8f5a3867155f07,
     type: 3}
-  incrementValue: 25
   maxPower: 100
+  bySecond: 3
+  whenScoring: 10
+  whenTakingGoal: 20
+  whenInteract: 4
 --- !u!114 &7014804650496689968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +436,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -444,6 +468,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
         type: 3}
@@ -462,16 +491,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
-        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -484,21 +503,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cfe5f10582617a0498b40b45022340cc,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cfe5f10582617a0498b40b45022340cc,
         type: 3}
