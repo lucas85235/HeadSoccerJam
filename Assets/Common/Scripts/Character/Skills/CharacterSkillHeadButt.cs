@@ -64,7 +64,7 @@ namespace MadeInHouse.Characters
                     // Debug.Log("Kick 4");
                 }
 
-                if (characterIA != null)
+                if (tag == "Player2")
                 {
                     rebound.x = -rebound.x;
                 }

@@ -13,6 +13,7 @@ namespace MadeInHouse
     {
         protected LoadSelectCharacter load;
         public bool canScoring { get; private set; }
+        public bool isReady = false;
 
         [Header("Instantiete")]
         public Transform playerOne;
@@ -32,6 +33,9 @@ namespace MadeInHouse
 
         [Header("Hud")]
         public SoccerHud hud;
+
+        [Header("Hud Stats")]
+        public PlayerHud[] hudStats = new PlayerHud[2];
 
         [Header("Sound")]
         public MatchSounds matchSounds;
@@ -67,15 +71,30 @@ namespace MadeInHouse
             }
 
             playerOne = Instantiate(playerOne, new Vector3(-7, -0.5f, -2), playerOne.rotation);
-            playerOne.GetComponent<Character>().SetCanUseSkills(false);
+            playerOne.tag = "Player1";
+
+            var characterOne = playerOne.GetComponent<Character>();
+            characterOne.SetCanUseSkills(false);
+            characterOne.playerIndex = 0;
 
             if (playerTwo != null && !playerTwo.gameObject.scene.IsValid())
             {
                 playerTwo = Instantiate(playerTwo, new Vector3(7, -0.5f, -2), playerTwo.rotation);
+                playerTwo.tag = "Player2";
+
+                var characterTwo = playerTwo.GetComponent<Character>();
+                characterTwo.SetCanUseSkills(false);
+                characterTwo.playerIndex = 1;
+
                 var playerTwoIA = playerTwo.GetComponent<CharacterIA>();
-                playerTwoIA.SetCpuLevel(playerTwoIA.cpuLevel);
-                playerTwo.GetComponent<Character>().SetCanUseSkills(false);
+                if (playerTwoIA != null)
+                {
+                    playerTwoIA.SetCpuLevel(playerTwoIA.cpuLevel);
+                }
+                else playerTwo.transform.eulerAngles = new Vector3(0, -90, 0);
             }
+
+            isReady = true;
 
             Invoke("OnMatchStart", timeToStart);
         }
@@ -99,8 +118,8 @@ namespace MadeInHouse
             playerOne.GetComponent<CharacterSkillLife>().SetMaxLife();
             playerTwo.GetComponent<CharacterSkillLife>().SetMaxLife();
             
-            playerOne.GetComponent<CharacterSkillPower>().powerSlider.value = 0;
-            playerTwo.GetComponent<CharacterSkillPower>().powerSlider.value = 0;
+            playerOne.GetComponent<CharacterSkillPower>().ResetPowerValue();
+            playerTwo.GetComponent<CharacterSkillPower>().ResetPowerValue();
 
             gameOver = false;
             canScoring = true;
@@ -273,6 +292,13 @@ namespace MadeInHouse
         public Text rightScoreText;
         public Text endMatchText;
         public Text coinEarnedText;
+    }
+
+    [System.Serializable]
+    public struct PlayerHud
+    {
+        public Slider powerSlider;
+        public Slider lifeSlider;
     }
 
     [System.Serializable]

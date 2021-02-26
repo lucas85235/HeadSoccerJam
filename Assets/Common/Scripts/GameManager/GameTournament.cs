@@ -65,9 +65,13 @@ namespace MadeInHouse
 
             playerTwo = levels[currentLevel].adversary.transform;
             playerTwo = Instantiate(playerTwo, new Vector3(7, -0.5f, -2), playerTwo.rotation);
+            playerTwo.tag = "Player2";
 
             playerTwo.GetComponent<CharacterIA>().SetCpuLevel(levels[currentLevel].difficulty);
-            playerTwo.GetComponent<Character>().SetCanUseSkills(false);
+        
+            var characterTwo = playerTwo.GetComponent<Character>();
+            characterTwo.SetCanUseSkills(false);
+            characterTwo.playerIndex = 1;
 
             currentLevel++;
             levelText.text = currentLevel.ToString();

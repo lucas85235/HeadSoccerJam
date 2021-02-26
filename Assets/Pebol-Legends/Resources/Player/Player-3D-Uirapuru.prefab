@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 1762037499907261060}
   m_Layer: 9
   m_Name: Player-3D-Uirapuru
-  m_TagString: Player1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -291,6 +291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 4379242631230016911}
+  characterType: 0
+  playerIndex: 0
 --- !u!114 &5928698702107285792
 MonoBehaviour:
   m_ObjectHideFlags: 0

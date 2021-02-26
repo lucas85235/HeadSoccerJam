@@ -10,9 +10,9 @@ namespace MadeInHouse.Characters
         protected Rigidbody rb;
         protected Collider thisCollider;
         protected DetectGround detectGround;
+        protected Slider lifeSlider;
 
         [Header("Life Setup")]
-        public Slider lifeSlider;
         public int maxLife = 5;
 
         [Header("Knockout Setup")]
@@ -31,13 +31,23 @@ namespace MadeInHouse.Characters
             thisCollider = GetComponent<Collider>();
             detectGround = GetComponent<DetectGround>();
 
-            var canvas = GameObject.Find("PlayerHud").transform;
-            lifeSlider = Instantiate(lifeSlider, canvas);
+            lifeSlider = GameManager.Instance.hudStats[character.playerIndex].lifeSlider;
             lifeSlider.maxValue = maxLife;
             lifeSlider.value = maxLife;
 
             isKnockout = false;
             extendKnockTimer = false;
+        }
+
+        protected override IEnumerator Start()
+        {
+            base.Start();
+
+            if (characterIA == null) yield return new WaitUntil( () => character.input != null );
+
+            lifeSlider = GameManager.Instance.hudStats[character.playerIndex].lifeSlider;
+            lifeSlider.maxValue = maxLife;
+            lifeSlider.value = maxLife;
         }
 
         public virtual void SetMaxLife()

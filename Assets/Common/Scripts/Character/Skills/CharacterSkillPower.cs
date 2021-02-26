@@ -10,9 +10,9 @@ namespace MadeInHouse.Characters
     {
         protected Transform canvas;
         protected CharacterPower power;
+        protected Slider powerSlider;
 
         [Header("Setup")]
-        public Slider powerSlider;
         public float maxPower = 100f;
 
         [Header("Increment")]
@@ -21,26 +21,30 @@ namespace MadeInHouse.Characters
         public float whenTakingGoal = 10;
         public float whenInteract = 2;
 
-        protected override IEnumerator Start()
-        {
-            base.Start();
-
-            yield return new WaitUntil( () => character.input != null );
-
-            InputCode = character.input.Power;
-
-        }
-
         protected override void Initialize()
         {
             base.Initialize();
 
             power = GetComponent<CharacterPower>();
-            canvas = GameObject.Find("PlayerHud").transform;
-            powerSlider = Instantiate(powerSlider, canvas);
+            powerSlider = GameManager.Instance.hudStats[character.playerIndex].powerSlider;
             powerSlider.maxValue = maxPower;
             powerSlider.value = 0;
         }
+
+        protected override IEnumerator Start()
+        {
+            base.Start();
+
+            if (characterIA == null) 
+            {
+                yield return new WaitUntil( () => character.input != null );
+                InputCode = character.input.Power;                
+            }
+
+            powerSlider = GameManager.Instance.hudStats[character.playerIndex].powerSlider;
+            powerSlider.maxValue = maxPower;
+            powerSlider.value = 0;
+        }        
 
         public override void UseSkill()
         {
@@ -76,6 +80,11 @@ namespace MadeInHouse.Characters
                 iPower = whenInteract;
 
             powerSlider.value += iPower;
+        }
+
+        public void ResetPowerValue()
+        {
+            powerSlider.value = 0;
         }
     }
 

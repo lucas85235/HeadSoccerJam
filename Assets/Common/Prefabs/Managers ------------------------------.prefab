@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1a0dc7cfded59459af63faebc061ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isReady: 0
   playerOne: {fileID: 0}
   playerTwo: {fileID: 967639064743247647, guid: 81489935c855bcb438435e92941ac6d0,
     type: 3}
@@ -193,6 +194,15 @@ MonoBehaviour:
     rightScoreText: {fileID: 0}
     endMatchText: {fileID: 0}
     coinEarnedText: {fileID: 0}
+  hudStats:
+  - powerSlider: {fileID: 6934545350848447285, guid: 76f600bc9d7c9154ba8f5a3867155f07,
+      type: 3}
+    lifeSlider: {fileID: 883430605391499392, guid: 5670dfa171ce71243bd23ccb7ef37865,
+      type: 3}
+  - powerSlider: {fileID: 6934545350848447285, guid: b5f204c22cd2362488dce8fbdc130053,
+      type: 3}
+    lifeSlider: {fileID: 883430605391499392, guid: 34079fddd6a78e649abd9d4bd65ad353,
+      type: 3}
   matchSounds:
     startWhistle: {fileID: 8300000, guid: af4cb3494b96087428937c2348e754bd, type: 3}
     restartWhistle: {fileID: 8300000, guid: 1a5d0e636fa8d7246a717fbaefbf48e0, type: 3}
@@ -242,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 0
-  m_MaxPlayerCount: 2
+  m_MaxPlayerCount: 1
   m_AllowJoining: 1
   m_JoinBehavior: 2
   m_PlayerJoinedEvent:

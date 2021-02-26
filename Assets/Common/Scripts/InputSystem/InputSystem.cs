@@ -20,14 +20,19 @@ namespace MadeInHouse
             if (Instance == null) Instance = this;
         }
 
-        private void Start() 
+        private IEnumerator Start() 
         {
             inputHandle = GetComponent<InputHandle>();
             index = GetComponent<PlayerInput>().playerIndex;
 
-            foreach (var character in FindObjectsOfType<Character>())
+            if (GameManager.Instance != null)
             {
-                if (character.playerIndex == index) character.SetInputSystem(this);
+                yield return new WaitUntil( () => GameManager.Instance.isReady);
+
+                foreach (var character in FindObjectsOfType<Character>())
+                {
+                    if (character.playerIndex == index) character.SetInputSystem(this);
+                }                
             }
         }
 

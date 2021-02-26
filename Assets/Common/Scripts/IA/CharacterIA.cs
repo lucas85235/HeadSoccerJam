@@ -52,7 +52,6 @@ namespace MadeInHouse.Characters
             skillKick = GetComponent<CharacterSkillKick>();
             skillJump = GetComponent<CharacterSkillJump>();
 
-            player = GameObject.FindGameObjectWithTag("Player1").GetComponent<CharacterSkill>();
 
             canMove = true;
             lastPosition = transform.position;
@@ -60,6 +59,7 @@ namespace MadeInHouse.Characters
 
         void Start()
         {
+            player = GameObject.FindGameObjectWithTag("Player1").GetComponent<CharacterSkill>();
             ball = FindObjectOfType<BallBehaviour>();
         }
 

@@ -113,7 +113,7 @@ namespace MadeInHouse.Characters
                     PlaySound();
                     Vector3 rebound = new Vector3(Random.Range(3.0f, 3.5f), Random.Range(0, 0.5f));
 
-                    if (characterIA != null)
+                    if (tag == "Player2")
                     {
                         rebound.x = -rebound.x;
                     }

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Pebol-Legends/Scenes/MainMenu.unity
     guid: 45383735ab9fe0b408ff48cba9447147
   - enabled: 1
+    path: Assets/Pebol-Legends/Scenes/Cups/GamePvP.unity
+    guid: 8bd7b84960c50914f9623b7245b8961b
+  - enabled: 1
     path: Assets/Pebol-Legends/Scenes/Cups/GameTest.unity
     guid: 165b9efeeca6a3646a86717a32fae5e7
   - enabled: 1
