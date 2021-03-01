@@ -211,8 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canUseSkills: 1
   skillSound: {fileID: 0}
-  lifeSlider: {fileID: 883430605391499392, guid: 5670dfa171ce71243bd23ccb7ef37865,
-    type: 3}
   maxLife: 5
   knockoutTimer: 2
   invencibleTimer: 0.5
@@ -314,8 +312,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canUseSkills: 1
   skillSound: {fileID: 0}
-  powerSlider: {fileID: 6934545350848447285, guid: 76f600bc9d7c9154ba8f5a3867155f07,
-    type: 3}
   maxPower: 100
   bySecond: 3
   whenScoring: 10
@@ -524,7 +520,7 @@ PrefabInstance:
     - target: {fileID: 7338319208658054289, guid: cfe5f10582617a0498b40b45022340cc,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7338319208658054289, guid: cfe5f10582617a0498b40b45022340cc,
         type: 3}
