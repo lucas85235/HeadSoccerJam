@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1a0dc7cfded59459af63faebc061ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isReady: 0
   playerOne: {fileID: 0}
   playerTwo: {fileID: 967639064743247647, guid: 81489935c855bcb438435e92941ac6d0,
     type: 3}
@@ -193,6 +194,15 @@ MonoBehaviour:
     rightScoreText: {fileID: 0}
     endMatchText: {fileID: 0}
     coinEarnedText: {fileID: 0}
+  hudStats:
+  - powerSlider: {fileID: 6934545350848447285, guid: 76f600bc9d7c9154ba8f5a3867155f07,
+      type: 3}
+    lifeSlider: {fileID: 883430605391499392, guid: 5670dfa171ce71243bd23ccb7ef37865,
+      type: 3}
+  - powerSlider: {fileID: 6934545350848447285, guid: b5f204c22cd2362488dce8fbdc130053,
+      type: 3}
+    lifeSlider: {fileID: 883430605391499392, guid: 34079fddd6a78e649abd9d4bd65ad353,
+      type: 3}
   matchSounds:
     startWhistle: {fileID: 8300000, guid: af4cb3494b96087428937c2348e754bd, type: 3}
     restartWhistle: {fileID: 8300000, guid: 1a5d0e636fa8d7246a717fbaefbf48e0, type: 3}
@@ -207,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3859052100235324767}
-  - component: {fileID: 3706051521827599080}
+  - component: {fileID: 2809408635214225287}
   m_Layer: 0
   m_Name: InputSystem
   m_TagString: Untagged
@@ -229,7 +239,7 @@ Transform:
   m_Father: {fileID: 2993158169297172357}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3706051521827599080
+--- !u!114 &2809408635214225287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,16 +248,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 2337072423773923942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5138d2e1025dc91459223314420d6291, type: 3}
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axisX: Horizontal
-  axisY: Vertical
-  jumpInput: 122
-  kickInput: 120
-  powerInput: 101
-  interactInput: 102
-  escapeInput: 27
+  m_NotificationBehavior: 0
+  m_MaxPlayerCount: 1
+  m_AllowJoining: 1
+  m_JoinBehavior: 2
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+    m_Reference: {fileID: 0}
+  m_PlayerPrefab: {fileID: 4504176469974494938, guid: 303b950bba1610e49bfa5cf25bddd762,
+    type: 3}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &2993158169297172475
 GameObject:
   m_ObjectHideFlags: 0

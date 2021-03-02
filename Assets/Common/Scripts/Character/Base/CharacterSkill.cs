@@ -20,9 +20,14 @@ namespace MadeInHouse.Characters
         [Header("Feedbakcs")]
         public AudioClip skillSound;
 
-        protected virtual void Start()
+        private void Awake() 
         {
             Initialize();
+        }
+
+        protected virtual IEnumerator Start()
+        {
+            yield return null;
         }
 
         protected virtual void Initialize()

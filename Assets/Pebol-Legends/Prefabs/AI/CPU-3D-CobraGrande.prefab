@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 593403252533870555}
+  characterType: 1
 --- !u!114 &967639064743247655
 MonoBehaviour:
   m_ObjectHideFlags: 0

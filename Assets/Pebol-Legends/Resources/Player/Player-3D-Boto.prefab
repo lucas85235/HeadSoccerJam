@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: -1502963056721231551}
   m_Layer: 9
   m_Name: Player-3D-Boto
-  m_TagString: Player1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,6 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1094831598575992664}
+  characterType: 0
+  playerIndex: 0
 --- !u!114 &967639064743247655
 MonoBehaviour:
   m_ObjectHideFlags: 0

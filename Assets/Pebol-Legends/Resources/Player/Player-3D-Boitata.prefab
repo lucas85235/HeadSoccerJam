@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 7014804650496689968}
   m_Layer: 9
   m_Name: Player-3D-Boitata
-  m_TagString: Player1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,6 +195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1192415829523268219}
+  characterType: 0
+  playerIndex: 0
 --- !u!114 &967639064743247655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,8 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canUseSkills: 1
   skillSound: {fileID: 0}
-  lifeSlider: {fileID: 883430605391499392, guid: 5670dfa171ce71243bd23ccb7ef37865,
-    type: 3}
   maxLife: 5
   knockoutTimer: 2
   invencibleTimer: 0.5
@@ -312,8 +312,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canUseSkills: 1
   skillSound: {fileID: 0}
-  powerSlider: {fileID: 6934545350848447285, guid: 76f600bc9d7c9154ba8f5a3867155f07,
-    type: 3}
   maxPower: 100
   bySecond: 3
   whenScoring: 10
@@ -522,7 +520,7 @@ PrefabInstance:
     - target: {fileID: 7338319208658054289, guid: cfe5f10582617a0498b40b45022340cc,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7338319208658054289, guid: cfe5f10582617a0498b40b45022340cc,
         type: 3}
