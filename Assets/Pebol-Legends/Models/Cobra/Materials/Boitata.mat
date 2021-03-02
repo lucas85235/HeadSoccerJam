@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Boitata
-  m_Shader: {fileID: -6465566751694194690, guid: 5070aa8c79aa66743acc6d5617c65785,
+  m_Shader: {fileID: -6465566751694194690, guid: b348d02e845574543b289b971a95b0e2,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -35,6 +35,14 @@ Material:
     m_TexEnvs:
     - Texture2D_87A40D60:
         m_Texture: {fileID: 2800000, guid: cf868300af791534db6c97080c4cf920, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_89BC71F2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_8BFCC9A8:
+        m_Texture: {fileID: 2800000, guid: 406e4ca4d2ae0604fbdc690875039fdc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -65,7 +73,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ToonShaderCore_99106B09_Texture2D2AC0C531_1914475174:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_31AA321F: 0.015
     - Vector1_6251504B: 0
     - Vector1_71AF7980: 0.5
     - Vector1_8D7CAC76: -1
@@ -93,7 +106,11 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_2B7AC181: {r: 0.2941177, g: 0.2941177, b: 0.2941177, a: 0}
+    - Color_4E1FC384: {r: 1, g: 1, b: 1, a: 0}
     - Color_4E3FBE63: {r: 1, g: 1, b: 1, a: 0}
+    - Color_9D4A025D: {r: 0.9221513, g: 0.7676548, b: 0.36210132, a: 0}
+    - Color_C078CAB: {r: 1, g: 0.6154237, b: 0, a: 0}
+    - Vector2_D512EBD9: {r: 0.25, g: 0.25, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
